@@ -70,7 +70,7 @@ pipeline {
         }
         success {
             echo 'This will run only if successful'
-            junit 'petshop_ms/dominio/build/test-results/test/junitTestResult.xml'
+            junit 'petshop_ms/dominio/build/test-results/test/*.xml'
         }
         failure {
             echo 'This will run only if failed'
