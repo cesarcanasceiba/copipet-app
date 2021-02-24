@@ -53,7 +53,7 @@ public class Pedido {
 		this.fechaEntrega = fechaEntrega;
 		this.costoTotal = this.getCostoTotalFromProductosCitas(productos, citasPeluqueria);
 	}
-	
+
 	/**
 	 * Calcula el precio del pedido en función de la lista de productos y citas de peluquería
 	 * @param productos
