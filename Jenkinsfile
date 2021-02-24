@@ -59,7 +59,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "------------>Build<------------"
-                sh '/petshop_ms/gradlew --b ./petshop_ms/build.gradle build -x test'
+                sh './petshop_ms/gradlew --b ./petshop_ms/build.gradle build -x test'
             }
         }  
     }
