@@ -40,7 +40,8 @@ pipeline {
         stage('Compile & Unit Tests') {
             steps{
                 echo "------------>Unit Tests<------------"
-                sh 'chmod +x ./petshop_ms/gradlew --b ./petshop_ms/build.gradle clean compileJava'
+                sh 'chmod +x ./petshop_ms/gradlew'
+                sh './petshop_ms/gradlew --b ./petshop_ms/build.gradle clean compileJava'
                 sh './petshop_ms/gradlew --b ./petshop_ms/build.gradle test'
 
             }
