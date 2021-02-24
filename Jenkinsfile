@@ -51,7 +51,7 @@ pipeline {
             steps{
                 echo '------------>Análisis de código estático<------------'
                 withSonarQubeEnv('Sonar') {
-                    sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+                    sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
                 }
             }
         }
@@ -66,7 +66,7 @@ pipeline {
 
     post {
         always {
-            echo 'This will always run '
+            echo 'This will always run'
         }
         success {
             echo 'This will run only if successful'
