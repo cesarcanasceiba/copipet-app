@@ -6,13 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import com.ceiba.citapeluqueria.exception.PesoNoAceptadoException;
@@ -23,76 +21,89 @@ import com.ceiba.pedido.exception.ConverterNoImplementadoException;
 import com.ceiba.pedido.exception.FechaDePedidoInvalidaException;
 import com.ceiba.pedido.exception.PedidoConListasVaciasException;
 import com.ceiba.pedido.exception.PedidoSinElementosException;
+import com.ceiba.pedido.testdatabuilder.PedidoTestDataBuilder;
 import com.ceiba.producto.modelo.entidad.Producto;
 
-public class PedidoTest {
-
-	private List lista;
+class PedidoTest {
 
 	@Test
-	public void pedidoSinValoresValidosProductosCitasTest() {
+	void pedidoSinValoresValidosProductosCitasTest() {
 		final Date fechaPrueba = new Date();
-		
 		assertThrows(
 				PedidoSinElementosException.class,
-				()->new Pedido(null, null, null, fechaPrueba, null, null, null),
+				()->new PedidoTestDataBuilder()
+					.setProductos(null)
+					.setCitasPeluqueria(null)
+					.setBonoDescuento(null)
+					.setFechaEntrega(fechaPrueba)
+					.setCurrency(null)
+					.setCostoTotal(null)
+					.setCurrencyConverter(null).build(),
 				"El pedido acepta valores nulos de productos y citas");
 	}
 	
 	@Test
-	public void pedidosConListasVaciasTest() {
+	void pedidosConListasVaciasTest() {
 		final Date fechaPrueba = new Date();
 		
 		assertThrows(
 				PedidoConListasVaciasException.class,
-				()->new Pedido(new ArrayList<>(), new ArrayList<>(), null, fechaPrueba, null, null, null),
+				()->new PedidoTestDataBuilder()
+					.setProductos(new ArrayList<>())
+					.setCitasPeluqueria(new ArrayList<>())
+					.setBonoDescuento(null)
+					.setFechaEntrega(fechaPrueba)
+					.setCurrency(null)
+					.setCostoTotal(null)
+					.setCurrencyConverter(null).build(),
 				"El pedido no debe aceptar listas vacias de productos y citas");
 	}
 
 	@Test
-	public void fechaInvalidaPedido() {
-		final Date fechaPrueba = new Date();
-		List lista = Mockito.mock(ArrayList.class);
-        Mockito.when(lista.isEmpty()).thenReturn(false);
-		
+	void fechaInvalidaPedido() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.add(Calendar.DAY_OF_YEAR, -1);
+		Date fechaPrueba = calendar.getTime();
 		assertThrows(
 				FechaDePedidoInvalidaException.class,
-				()->new Pedido(lista, lista, null, fechaPrueba, null, null, null),
+				()->new PedidoTestDataBuilder()
+					.setBonoDescuento(null)
+					.setFechaEntrega(fechaPrueba)
+					.setCurrency(null)
+					.setCostoTotal(null)
+					.setCurrencyConverter(null).build(),
 				"El pedido acepta una fecha inválida");
 	}
-	
+
 	@Test
-	public void converterNoImplementadoTest() throws ParseException {
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		Date fechaPrueba = calendar.getTime();
-		List lista = Mockito.mock(ArrayList.class);
+	void converterNoImplementadoTest() throws ParseException {
+
 		assertThrows(
 				ConverterNoImplementadoException.class,
-				()->new Pedido(lista, lista, null, fechaPrueba, CurrencyType.USD, null, null),
+				()->new PedidoTestDataBuilder()
+					.setBonoDescuento(null)
+					.setCurrency(CurrencyType.USD)
+					.setCostoTotal(null)
+					.setCurrencyConverter(null).build(),
 				"El pedido siendo en dolares no tiene un conversor de moneda");
 	}
-	
+
 	@Test
-	public void integracionPedidoConverter() throws ParseException, PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException {
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	void integracionPedidoConverter() throws ParseException, PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
 		calendar.add(Calendar.DAY_OF_YEAR, 1);
 		Date fechaPrueba = calendar.getTime();
-		lista = Mockito.mock(ArrayList.class);
-		CurrencyConverterInterface converter = new CurrencyConverterInterface() {
-			
-			@Override
-			public Long fromUsDToCop(Long usD) {
-				
-				return usD * 5;
-			}
-		};
+		CurrencyConverterInterface converter = (Long usD) -> usD * 5;
 		Long valorInicial = Long.valueOf("100");
-		Pedido instance = new Pedido(lista, lista, null, fechaPrueba, CurrencyType.USD, valorInicial, converter);
+//		new Pedido(lista, lista, null, fechaPrueba, CurrencyType.USD, valorInicial, converter)
+		Pedido instance = new PedidoTestDataBuilder()
+				.setBonoDescuento(null)
+				.setFechaEntrega(fechaPrueba)
+				.setCurrency(CurrencyType.USD)
+				.setCostoTotal(valorInicial)
+				.setCurrencyConverter(converter).build();
 		Long nuevoValor = Long.valueOf("500");
 		assertEquals(
 				"El conversor se ejecuta adecuadamente",
@@ -100,7 +111,7 @@ public class PedidoTest {
 	}
 
 	@Test
-	public void calculoCostoTotalSobreListados() throws PedidoConListasVaciasException, ParseException, PesoNoAceptadoException  {
+	void calculoCostoTotalSobreListados() throws PedidoConListasVaciasException, ParseException, PesoNoAceptadoException  {
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date fechaPrueba = formatter.parse("2021-02-23");
 		Producto p1 = Mockito.mock(Producto.class);
@@ -143,8 +154,7 @@ public class PedidoTest {
 	}
 	
 	@Test
-	public void calculoCostoConBonoDescuento() throws PedidoConListasVaciasException, ParseException, PesoNoAceptadoException  {
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	void calculoCostoConBonoDescuento() throws PedidoConListasVaciasException, ParseException, PesoNoAceptadoException  {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
 		calendar.add(Calendar.DAY_OF_YEAR, 1);
@@ -196,7 +206,7 @@ public class PedidoTest {
 	}
 	
 	@Test
-	public void fechaNoCanjeableBonoDescuento() throws PedidoConListasVaciasException, ParseException, PesoNoAceptadoException  {
+	void fechaNoCanjeableBonoDescuento() throws PedidoConListasVaciasException, ParseException, PesoNoAceptadoException  {
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());

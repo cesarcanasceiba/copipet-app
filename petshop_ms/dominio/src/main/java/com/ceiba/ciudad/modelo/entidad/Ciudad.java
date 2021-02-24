@@ -4,6 +4,14 @@ import lombok.Getter;
 
 @Getter
 public class Ciudad {
-    private Long id;
+    public Ciudad(Long id, String nombre) {
+		this.id = id;
+		this.nombre = nombre;
+	}
+	private Long id;
     private String nombre;
+    
+    public boolean equals(Ciudad other) {
+    	return this.id.equals(other.getId());
+    }
 }

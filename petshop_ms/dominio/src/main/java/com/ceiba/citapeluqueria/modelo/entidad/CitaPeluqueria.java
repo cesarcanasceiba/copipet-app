@@ -1,9 +1,11 @@
 package com.ceiba.citapeluqueria.modelo.entidad;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import lombok.*;
 
+import com.ceiba.citapeluqueria.exception.FechaInicioCitaInvalidaException;
 import com.ceiba.citapeluqueria.exception.PesoNoAceptadoException;
 import com.ceiba.usuario.modelo.entidad.Usuario;
 
@@ -12,26 +14,35 @@ public class CitaPeluqueria {
     private Long id;
     private Peluquero peluquero;
     private List<ServicioPeluqueria> servicios;
-    private Date horaInicio;
-    private Date horaFinal;
+    private Date fechaInicio;
+    private Date fechaFinal;
     private Usuario usuario;
     private String fotoMascota;
-    private Integer pesoMascota;
-    private Integer costoCita;
-	
-    public CitaPeluqueria(Peluquero peluquero, List<ServicioPeluqueria> servicios, Date horaInicio, Date horaFinal,
-			Usuario usuario, String fotoMascota, Integer pesoMascota) {
-		super();
+    private Float pesoMascota;
+    private Long costoCita;
+
+    public CitaPeluqueria(@NonNull Peluquero peluquero, @NonNull List<ServicioPeluqueria> servicios, @NonNull Date fechaInicio,
+    		@NonNull Usuario usuario, @NonNull String fotoMascota, @NonNull Float pesoMascota
+    		) throws PesoNoAceptadoException, FechaInicioCitaInvalidaException {
+
+    	this.validarFechaInicio(fechaInicio);
 		this.peluquero = peluquero;
 		this.servicios = servicios;
-		this.horaInicio = horaInicio;
-		this.horaFinal = horaFinal;
+		this.fechaInicio = fechaInicio;
+		this.fechaFinal = this.estimarFechaFinal(fechaInicio, pesoMascota);
 		this.usuario = usuario;
 		this.fotoMascota = fotoMascota;
 		this.pesoMascota = pesoMascota;
+		this.costoCita = this.calcularPrecio();
 	}
-    
-    public Long calcularPrecio() throws PesoNoAceptadoException {
+
+	private void validarFechaInicio(Date fechaInicio) throws FechaInicioCitaInvalidaException {
+		if(fechaInicio.compareTo(new Date()) < 0) throw new FechaInicioCitaInvalidaException();
+	}
+
+
+
+	public Long calcularPrecio() throws PesoNoAceptadoException {
     	if(isBetween(this.pesoMascota, 2, 4.5)) {
     		return 35000L;
     	}else if(isBetween(this.pesoMascota, 4.5, 10)) {
@@ -47,9 +58,26 @@ public class CitaPeluqueria {
     	}
     }
     
-    private boolean isBetween(int x, double lower, double upper) {
+    private boolean isBetween(float x, double lower, double upper) {
     	  return lower <= x && x <= upper;
     }
-    
-    
+
+    public Date estimarFechaFinal(Date fechaInicio, Float peso) throws PesoNoAceptadoException {
+    	Calendar calendar = Calendar.getInstance();
+    	calendar.setTime(fechaInicio);
+    	if(isBetween(peso, 2, 4.5)) {
+    		calendar.add(Calendar.MINUTE, 30);
+    	}else if(isBetween(peso, 4.5, 10)) {
+    		calendar.add(Calendar.MINUTE, 45);
+    	}else if(isBetween(peso, 10, 20)) {
+    		calendar.add(Calendar.MINUTE, 60);
+    	}else if(isBetween(peso, 20, 40)) {
+    		calendar.add(Calendar.MINUTE, 90);
+    	}else if(isBetween(peso, 40, 55)) {
+    		calendar.add(Calendar.MINUTE, 120);
+    	}else {
+   		    throw new PesoNoAceptadoException();
+    	}
+    	return calendar.getTime();
+    }
 }

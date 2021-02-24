@@ -8,14 +8,10 @@ public enum CurrencyType {
 	
 	private CurrencyType(String definicion) {
 		
-		this.setDefinicion(definicion);
+		this.definicion = definicion;
 	}
 
 	public String getDefinicion() {
 		return definicion;
-	}
-
-	public void setDefinicion(String definicion) {
-		this.definicion = definicion;
 	}
 }

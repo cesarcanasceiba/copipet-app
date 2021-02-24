@@ -1,6 +1,5 @@
 package com.ceiba.pedido.servicio;
 
-import com.ceiba.pedido.currency.converter.CurrencyConverterInterface;
 import com.ceiba.pedido.modelo.entidad.Pedido;
 import com.ceiba.pedido.puerto.repositorio.RepositorioPedido;
 
@@ -11,7 +10,7 @@ public class ServicioCrearPedido {
     	this.repositorioPedido = respositorioPedido;
     }
     
-    public Pedido ejecutar(Pedido pedido, CurrencyConverterInterface currencyConverter) {
+    public Pedido ejecutar(Pedido pedido) {
     	
     	return this.repositorioPedido.crear(pedido);
     }

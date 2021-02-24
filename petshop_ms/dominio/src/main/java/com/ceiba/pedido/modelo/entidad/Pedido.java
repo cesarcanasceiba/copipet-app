@@ -25,20 +25,20 @@ public class Pedido {
     private Date fechaEntrega;
     private CurrencyType currency;
 	private CurrencyConverterInterface currencyConverter;
-	public Pedido(List<Producto> productos, List<CitaPeluqueria> citasPeluqueria, BonoDescuento bonoDescuento,
+	public Pedido(Long id, List<Producto> productos, List<CitaPeluqueria> citasPeluqueria, BonoDescuento bonoDescuento,
 			Date fechaEntrega, CurrencyType currency, Long costoTotal, CurrencyConverterInterface currencyConverter) throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException {
-		
-		this(productos, citasPeluqueria, costoTotal, bonoDescuento, fechaEntrega);
+		this(id, productos, citasPeluqueria, costoTotal, bonoDescuento, fechaEntrega);
 		this.currency = currency;
 		this.currencyConverter = currencyConverter;
 		this.costoTotal = this.definirCostoTotal(costoTotal, currency, currencyConverter);
 	}
 	
-	public Pedido(List<Producto> productos, List<CitaPeluqueria> citasPeluqueria, Long costoTotal, BonoDescuento bonoDescuento, Date fechaEntrega) throws PedidoSinElementosException, FechaDePedidoInvalidaException, PedidoConListasVaciasException, ConverterNoImplementadoException {
+	public Pedido(Long id, List<Producto> productos, List<CitaPeluqueria> citasPeluqueria, Long costoTotal, BonoDescuento bonoDescuento, Date fechaEntrega) throws PedidoSinElementosException, FechaDePedidoInvalidaException, PedidoConListasVaciasException {
+		
 		this.validarCitasProductosPedido(citasPeluqueria, productos);
 		this.validarListasCitasProductosNoVacios(citasPeluqueria, productos);
 		this.validarFechaPedido(fechaEntrega);
-		
+		this.id = id;
 		this.productos = productos;
 		this.citasPeluqueria = citasPeluqueria;
 		this.bonoDescuento = bonoDescuento;
@@ -66,7 +66,7 @@ public class Pedido {
 				.stream()
 				.map(Producto::getPrecio)
 				.reduce((precio, acc)->precio + acc)
-				.map((precio)->{
+				.map(precio->{
 					if(Pedido.this.esBonoCanjeable(this.bonoDescuento)) {
 						return (precio * (int)((1 - this.bonoDescuento.getDescuento()) * 100))/100;
 					}else {
@@ -134,7 +134,11 @@ public class Pedido {
 	 * @throws Exception
 	 */
 	private void validarListasCitasProductosNoVacios(List<CitaPeluqueria> citas, List<Producto> productos) throws PedidoConListasVaciasException  {
-		if(citas.isEmpty() && productos.isEmpty()) throw new PedidoConListasVaciasException();
+		if(citas !=null && productos != null && citas.isEmpty() && productos.isEmpty()) {
+			throw new PedidoConListasVaciasException();	
+		}
+		
+		
 	}
 	
 	/**
@@ -155,5 +159,9 @@ public class Pedido {
 			}
     	}
 		return costo;
+	}
+	
+	public boolean equals(Pedido other) {
+		return this.id.equals(other.id);
 	}
 }
