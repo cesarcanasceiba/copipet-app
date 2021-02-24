@@ -61,7 +61,7 @@ pipeline {
                 echo "------------>Build<------------"
                 sh './petshop_ms/gradlew --b ./petshop_ms/build.gradle build -x test'
             }
-        }  
+        }
     }
 
     post {
@@ -70,7 +70,7 @@ pipeline {
         }
         success {
             echo 'This will run only if successful'
-            junit 'petshop_ms/build/test-results/test/*.xml'
+            junit 'petshop_ms/dominio/build/test-results/test/*.xml'
         }
         failure {
             echo 'This will run only if failed'
