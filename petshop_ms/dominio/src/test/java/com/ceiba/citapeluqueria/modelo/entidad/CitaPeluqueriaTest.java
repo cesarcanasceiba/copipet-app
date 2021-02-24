@@ -1,7 +1,6 @@
 package com.ceiba.citapeluqueria.modelo.entidad;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -49,9 +48,9 @@ class CitaPeluqueriaTest {
 		Date fechaFinal = cl.getTime();
 
 		assertEquals(
-				"No se asigna la fecha final correctamente",
 				0,
-				cita.getFechaFinal().compareTo(fechaFinal));
+				cita.getFechaFinal().compareTo(fechaFinal),
+				"No se asigna la fecha final correctamente");
 	}
 	
 	@ParameterizedTest
@@ -66,15 +65,15 @@ class CitaPeluqueriaTest {
 		CitaPeluqueria cita = new CitaPeluqueriaTestDataBuilder().setPesoMascota(pesoMascota).build();
         
 		assertEquals(
-				"El precio se calculó incorrectamente",
 				0,
-				cita.calcularPrecio().compareTo(precio));
+				cita.calcularPrecio().compareTo(precio),
+				"El precio se calculï¿½ incorrectamente");
 	}
 	
 	@Test
 	void recuperarPrecio() throws PesoNoAceptadoException, FechaInicioCitaInvalidaException {
 		CitaPeluqueria cita = new CitaPeluqueriaTestDataBuilder().setPesoMascota(3F).build();
-		assertEquals("No retorna el costo de la cita apropiado", 0, cita.getCostoCita().compareTo(35000L));
+		assertEquals(0, cita.getCostoCita().compareTo(35000L), "No retorna el costo de la cita apropiado");
 		
 	}
 	

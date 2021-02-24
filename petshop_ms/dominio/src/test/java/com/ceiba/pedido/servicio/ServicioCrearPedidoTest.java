@@ -1,6 +1,6 @@
 package com.ceiba.pedido.servicio;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.ParseException;
 
@@ -24,6 +24,6 @@ class ServicioCrearPedidoTest {
 		RepositorioPedido repositorio = Mockito.mock(RepositorioPedido.class);
 		Mockito.when(repositorio.crear(pedido)).thenReturn(pedido);
 		ServicioCrearPedido servicio = new ServicioCrearPedido(repositorio);
-		assertTrue("", servicio.ejecutar(pedido).equals(pedido));
+		assertTrue( servicio.ejecutar(pedido).equals(pedido),"");
 	}
 }

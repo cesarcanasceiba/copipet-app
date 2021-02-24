@@ -1,8 +1,8 @@
 rootProject.name = 'petshop'
 
+include ':dominio'
 include ':infraestructura'
 include ':aplicacion'
-include ':dominio'
 
 include ':comun', 
         ':comun:comun-infraestructura', 

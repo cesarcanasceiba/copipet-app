@@ -1,6 +1,6 @@
 package com.ceiba.pedido.modelo.entidad;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.text.DateFormat;
@@ -106,8 +106,8 @@ class PedidoTest {
 				.setCurrencyConverter(converter).build();
 		Long nuevoValor = Long.valueOf("500");
 		assertEquals(
-				"El conversor se ejecuta adecuadamente",
-				0, instance.getCostoTotal().compareTo(nuevoValor));
+				0, instance.getCostoTotal().compareTo(nuevoValor),
+				"El conversor se ejecuta adecuadamente");
 	}
 
 	@Test
@@ -149,8 +149,8 @@ class PedidoTest {
 		Long expected = 440L;
 		Pedido instance = new Pedido(listaProductos, listaCitas, null, fechaPrueba);
 		assertEquals(
-				"El pedido no calcula el precio total adecuedamente en función de sus listas de productos y citas",
-				expected, instance.getCostoTotal());
+				expected, instance.getCostoTotal(),
+				"El pedido no calcula el precio total adecuedamente en función de sus listas de productos y citas");
 	}
 	
 	@Test
@@ -201,8 +201,8 @@ class PedidoTest {
 		Long expected = 418L;
 		Pedido instance = new Pedido(listaProductos, listaCitas, bono, fechaPrueba);
 		assertEquals(
-				"El pedido no calcula correctamente el descuento sobre el pedido",
-				expected, instance.getCostoTotal());
+				expected, instance.getCostoTotal(),
+				"El pedido no calcula correctamente el descuento sobre el pedido");
 	}
 	
 	@Test
@@ -252,7 +252,7 @@ class PedidoTest {
 		Long expected = 440L;
 		Pedido instance = new Pedido(listaProductos, listaCitas, bono, fechaPrueba);
 		assertEquals(
-				"El pedido hace descuentos con un bono de fecha inválida",
-				expected, instance.getCostoTotal());
+				expected, instance.getCostoTotal(),
+				"El pedido hace descuentos con un bono de fecha inválida");
 	}
 }
