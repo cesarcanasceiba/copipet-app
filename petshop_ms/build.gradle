@@ -69,7 +69,7 @@ dependencies {
     	compile.exclude module: 'spring-boot-starter-tomcat'
 	}
 
-	compileOnly project.ext.springbootweb
+	implementation project.ext.springbootweb
 	runtimeOnly project.ext.springdevtools
 	
 	implementation project.ext.springbootundertow
