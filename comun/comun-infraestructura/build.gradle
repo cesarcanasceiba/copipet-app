@@ -11,16 +11,16 @@ repositories {
 
 dependencies {
 
-	compile project.ext.springbootweb
+	compileOnly project.ext.springbootweb
 	runtimeOnly project.ext.springdevtools
 	
-	compile project.ext.springbootjdbc
+	compileOnly project.ext.springbootjdbc
 
-	compile project.ext.springbootjasypt
+	compileOnly project.ext.springbootjasypt
 	
-	compile project.ext.apachecommons
-	compile project.ext.swagger
-	compile project.ext.actuator
+	compileOnly project.ext.apachecommons
+	compileOnly project.ext.swagger
+	compileOnly project.ext.actuator
 	
 	implementation project(':comun:comun-dominio')
 }

@@ -31,6 +31,10 @@ jacocoTestReport {
 	}
 }
 
+jacoco {
+    reportsDirectory = file("$buildDir/customJacocoReportDir")
+}
+
 test {
 	finalizedBy jacocoTestReport
 }

@@ -8,8 +8,8 @@ allprojects {
 			"org.apache.commons:commons-lang3:3.7"
 	]
 	
-	tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
-	tasks.withType(Test) { systemProperty "file.encoding", "UTF-8" }
+	tasks.withType(JavaCompile) { options.encoding = "iso-8859-1" }
+	tasks.withType(Test) { systemProperty "file.encoding", "iso-8859-1" }
 
 	project.ext.junit5 = ["org.junit.jupiter:junit-jupiter-api:5.7.1", "org.junit.jupiter:junit-jupiter-params:5.7.1"]
 	project.ext.junit5Runtime = ["org.junit.jupiter:junit-jupiter-engine:5.7.1", "org.junit.jupiter:junit-jupiter-params:5.7.1"]
@@ -55,7 +55,7 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 
 group = 'com.ceiba'
-version = '0.0.1-SNAPSHOT'
+project.version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '8'
 
 repositories {
@@ -69,7 +69,7 @@ dependencies {
     	compile.exclude module: 'spring-boot-starter-tomcat'
 	}
 
-	compile project.ext.springbootweb
+	compileOnly project.ext.springbootweb
 	runtimeOnly project.ext.springdevtools
 	
 	implementation project.ext.springbootundertow
@@ -80,6 +80,6 @@ dependencies {
 
 bootJar {
 	mainClassName = 'com.ceiba.Application'
-    baseName = 'petshop'
-    version =  version
+    archiveBaseName = 'petshop'
+    archiveVersion = project.version
 }

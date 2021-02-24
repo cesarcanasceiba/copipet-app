@@ -10,5 +10,5 @@ repositories {
 }
 
 dependencies {
-	compile project.ext.springtxt
+	compileOnly project.ext.springtxt
 }

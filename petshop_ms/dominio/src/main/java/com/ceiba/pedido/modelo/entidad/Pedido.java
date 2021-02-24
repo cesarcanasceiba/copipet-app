@@ -45,7 +45,7 @@ public class Pedido {
 		this.fechaEntrega = fechaEntrega;
 		this.costoTotal = costoTotal;
 	}
-	
+
 	public Pedido(List<Producto> productos, List<CitaPeluqueria> citasPeluqueria, BonoDescuento bonoDescuento, Date fechaEntrega) throws PedidoConListasVaciasException {
 		this.productos = productos;
 		this.citasPeluqueria = citasPeluqueria;
