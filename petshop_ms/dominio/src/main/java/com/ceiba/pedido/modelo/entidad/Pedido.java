@@ -6,8 +6,8 @@ import lombok.*;
 
 import com.ceiba.citapeluqueria.exception.PesoNoAceptadoException;
 import com.ceiba.citapeluqueria.modelo.entidad.CitaPeluqueria;
-import com.ceiba.pedido.currency.CurrencyType;
-import com.ceiba.pedido.currency.converter.CurrencyConverterInterface;
+import com.ceiba.pedido.currency.TipoMoneda;
+import com.ceiba.pedido.currency.converter.ConversorMonedaInterface;
 import com.ceiba.pedido.exception.ConverterNoImplementadoException;
 import com.ceiba.pedido.exception.FechaDePedidoInvalidaException;
 import com.ceiba.pedido.exception.PedidoConListasVaciasException;
@@ -21,20 +21,12 @@ public class Pedido {
     private List<Producto> productos;
     private List<CitaPeluqueria> citasPeluqueria;
     private BonoDescuento bonoDescuento;
-    private Long costoTotal;
     private Date fechaEntrega;
-    private CurrencyType currency;
-	private CurrencyConverterInterface currencyConverter;
-	public Pedido(Long id, List<Producto> productos, List<CitaPeluqueria> citasPeluqueria, BonoDescuento bonoDescuento,
-			Date fechaEntrega, CurrencyType currency, Long costoTotal, CurrencyConverterInterface currencyConverter) throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException {
-		this(id, productos, citasPeluqueria, costoTotal, bonoDescuento, fechaEntrega);
-		this.currency = currency;
-		this.currencyConverter = currencyConverter;
-		this.costoTotal = this.definirCostoTotal(costoTotal, currency, currencyConverter);
-	}
-	
-	public Pedido(Long id, List<Producto> productos, List<CitaPeluqueria> citasPeluqueria, Long costoTotal, BonoDescuento bonoDescuento, Date fechaEntrega) throws PedidoSinElementosException, FechaDePedidoInvalidaException, PedidoConListasVaciasException {
-		
+    private TipoMoneda tipoMoneda;
+	private ConversorMonedaInterface conversorMoneda;
+    private Long costoTotal;
+
+	public Pedido(Long id, List<Producto> productos, List<CitaPeluqueria> citasPeluqueria, BonoDescuento bonoDescuento, @NonNull Date fechaEntrega, @NonNull TipoMoneda tipoMoneda, ConversorMonedaInterface conversorMoneda) throws PedidoConListasVaciasException, PedidoSinElementosException, FechaDePedidoInvalidaException, ConverterNoImplementadoException {
 		this.validarCitasProductosPedido(citasPeluqueria, productos);
 		this.validarListasCitasProductosNoVacios(citasPeluqueria, productos);
 		this.validarFechaPedido(fechaEntrega);
@@ -43,15 +35,7 @@ public class Pedido {
 		this.citasPeluqueria = citasPeluqueria;
 		this.bonoDescuento = bonoDescuento;
 		this.fechaEntrega = fechaEntrega;
-		this.costoTotal = costoTotal;
-	}
-
-	public Pedido(List<Producto> productos, List<CitaPeluqueria> citasPeluqueria, BonoDescuento bonoDescuento, Date fechaEntrega) throws PedidoConListasVaciasException {
-		this.productos = productos;
-		this.citasPeluqueria = citasPeluqueria;
-		this.bonoDescuento = bonoDescuento;
-		this.fechaEntrega = fechaEntrega;
-		this.costoTotal = this.getCostoTotalFromProductosCitas(productos, citasPeluqueria);
+		this.costoTotal = this.definirCostoTotal(productos, citasPeluqueria, tipoMoneda, conversorMoneda);
 	}
 
 	/**
@@ -68,7 +52,7 @@ public class Pedido {
 				.reduce((precio, acc)->precio + acc)
 				.map(precio->{
 					if(Pedido.this.esBonoCanjeable(this.bonoDescuento)) {
-						return (precio * (int)((1 - this.bonoDescuento.getDescuento()) * 100))/100;
+						return (long) (precio * (1 - Pedido.this.bonoDescuento.getDescuento()));
 					}else {
 						return precio;
 					}
@@ -96,11 +80,11 @@ public class Pedido {
      * @return
      */
     private boolean esBonoCanjeable(BonoDescuento bono) {
-    	if(bonoDescuento != null) {
+    	if(bono != null) {
     		Date fechaInicial = bono.getInicioVigencia();
     		Date fechaFinal = bono.getFinVigencia();
     		Date current = new Date();
-    		return fechaInicial.compareTo(current) < 0 && 0 < fechaFinal.compareTo(current);
+    		return fechaInicial.compareTo(current) <= 0 && 0 <= fechaFinal.compareTo(current) && 0 < bono.getDescuento();
     	}else {
     		return false;
     	}
@@ -131,14 +115,18 @@ public class Pedido {
 	 * @param citas
 	 * @param productos
 	 * @throws PedidoConListasVaciasException 
+	 * @throws PedidoSinElementosException 
 	 * @throws Exception
 	 */
-	private void validarListasCitasProductosNoVacios(List<CitaPeluqueria> citas, List<Producto> productos) throws PedidoConListasVaciasException  {
-		if(citas !=null && productos != null && citas.isEmpty() && productos.isEmpty()) {
-			throw new PedidoConListasVaciasException();	
+	private void validarListasCitasProductosNoVacios(List<CitaPeluqueria> citas, List<Producto> productos) throws PedidoConListasVaciasException, PedidoSinElementosException  {
+		
+		if(citas == null && productos == null) {
+			throw new PedidoSinElementosException();
+		}else {
+			if (citas != null && productos != null && citas.isEmpty() && productos.isEmpty()) {
+				throw new PedidoConListasVaciasException();	
+		    }
 		}
-		
-		
 	}
 	
 	/**
@@ -148,20 +136,26 @@ public class Pedido {
 	 * @param currencyConverter
 	 * @return Valor de la compra en pesos colombianos
 	 * @throws ConverterNoImplementadoException 
+	 * @throws PedidoConListasVaciasException 
 	 */
-	private Long definirCostoTotal(Long costoTotal, CurrencyType currency, CurrencyConverterInterface currencyConverter) throws ConverterNoImplementadoException {
-		Long costo = costoTotal;
-		if(currency == CurrencyType.USD) {
+	private Long definirCostoTotal(List<Producto> productos, List<CitaPeluqueria> citasPeluqueria, TipoMoneda currency, ConversorMonedaInterface currencyConverter) throws ConverterNoImplementadoException, PedidoConListasVaciasException {
+		Long costo = this.getCostoTotalFromProductosCitas(productos, citasPeluqueria);
+		if(currency == TipoMoneda.USD) {
 			if(currencyConverter == null) {
 				throw new ConverterNoImplementadoException();
 			}else{
-				costo = currencyConverter.fromUsDToCop(costoTotal);	
+				costo = currencyConverter.fromUsDToCop(costo);	
 			}
     	}
 		return costo;
 	}
-	
-	public boolean equals(Pedido other) {
-		return this.id.equals(other.id);
+
+	@Override
+	public boolean equals(Object other) {
+		if(other == null) {
+			return false;
+		}else {
+			return this.id.equals(((Pedido) other).id);
+		}
 	}
 }

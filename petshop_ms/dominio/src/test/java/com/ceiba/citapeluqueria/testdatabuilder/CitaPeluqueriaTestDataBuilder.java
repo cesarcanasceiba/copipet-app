@@ -19,14 +19,14 @@ public class CitaPeluqueriaTestDataBuilder {
     private Peluquero peluquero;
     private List<ServicioPeluqueria> servicios;
     private Date fechaInicio;
-    private Date fechaFinal;
     private Usuario usuario;
     private String fotoMascota;
     private Float pesoMascota;
     
 
     public CitaPeluqueriaTestDataBuilder() {
-        this.peluquero = Mockito.mock(Peluquero.class);
+        this.id = 1L;
+    	this.peluquero = Mockito.mock(Peluquero.class);
 		this.servicios = new ArrayList<>();
 		ServicioPeluqueria servicio = Mockito.mock(ServicioPeluqueria.class);
 		this.servicios.add(servicio);
@@ -35,8 +35,6 @@ public class CitaPeluqueriaTestDataBuilder {
         calendar.setTime(new Date());
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         this.fechaInicio = calendar.getTime();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        this.fechaFinal = calendar.getTime();
 
         this.usuario = Mockito.mock(Usuario.class);
         this.fotoMascota = "";
@@ -79,6 +77,6 @@ public class CitaPeluqueriaTestDataBuilder {
 	}
 
 	public CitaPeluqueria build() throws PesoNoAceptadoException, FechaInicioCitaInvalidaException {
-		return new CitaPeluqueria(peluquero, servicios, fechaInicio, usuario, fotoMascota, pesoMascota);
+		return new CitaPeluqueria(id, peluquero, servicios, fechaInicio, usuario, fotoMascota, pesoMascota);
 	}
 }

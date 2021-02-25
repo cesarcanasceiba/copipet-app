@@ -3,7 +3,8 @@ package com.ceiba.producto.modelo.entidad;
 import lombok.*;
 
 @Getter
+@AllArgsConstructor
 public class MarcaProducto {
-    private Long id;
-    private String nombre;
+    @NonNull private Long id;
+    @NonNull private String nombre;
 }

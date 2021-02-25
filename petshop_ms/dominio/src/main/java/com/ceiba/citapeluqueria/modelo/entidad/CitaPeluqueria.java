@@ -21,11 +21,12 @@ public class CitaPeluqueria {
     private Float pesoMascota;
     private Long costoCita;
 
-    public CitaPeluqueria(@NonNull Peluquero peluquero, @NonNull List<ServicioPeluqueria> servicios, @NonNull Date fechaInicio,
+    public CitaPeluqueria(@NonNull Long id, @NonNull Peluquero peluquero, @NonNull List<ServicioPeluqueria> servicios, @NonNull Date fechaInicio,
     		@NonNull Usuario usuario, @NonNull String fotoMascota, @NonNull Float pesoMascota
     		) throws PesoNoAceptadoException, FechaInicioCitaInvalidaException {
 
     	this.validarFechaInicio(fechaInicio);
+    	this.id = id;
 		this.peluquero = peluquero;
 		this.servicios = servicios;
 		this.fechaInicio = fechaInicio;
@@ -43,7 +44,7 @@ public class CitaPeluqueria {
 
 
 	public Long calcularPrecio() throws PesoNoAceptadoException {
-    	if(isBetween(this.pesoMascota, 2, 4.5)) {
+    	if(this.pesoMascota == 2 || isBetween(this.pesoMascota, 2, 4.5)) {
     		return 35000L;
     	}else if(isBetween(this.pesoMascota, 4.5, 10)) {
     		return 50000L;
@@ -59,13 +60,13 @@ public class CitaPeluqueria {
     }
     
     private boolean isBetween(float x, double lower, double upper) {
-    	  return lower <= x && x <= upper;
+    	  return lower < x && x <= upper;
     }
 
     public Date estimarFechaFinal(Date fechaInicio, Float peso) throws PesoNoAceptadoException {
     	Calendar calendar = Calendar.getInstance();
     	calendar.setTime(fechaInicio);
-    	if(isBetween(peso, 2, 4.5)) {
+    	if(peso == 2 || isBetween(peso, 2, 4.5)) {
     		calendar.add(Calendar.MINUTE, 30);
     	}else if(isBetween(peso, 4.5, 10)) {
     		calendar.add(Calendar.MINUTE, 45);

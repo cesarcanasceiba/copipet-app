@@ -7,6 +7,7 @@ import java.text.ParseException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import com.ceiba.citapeluqueria.exception.FechaInicioCitaInvalidaException;
 import com.ceiba.citapeluqueria.exception.PesoNoAceptadoException;
 import com.ceiba.pedido.exception.ConverterNoImplementadoException;
 import com.ceiba.pedido.exception.FechaDePedidoInvalidaException;
@@ -19,7 +20,7 @@ import com.ceiba.pedido.testdatabuilder.PedidoTestDataBuilder;
 class ServicioCrearPedidoTest {
 
 	@Test
-	void crearPedido() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException {
+	void crearPedido() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException, FechaInicioCitaInvalidaException {
 		Pedido pedido = new PedidoTestDataBuilder().build();
 		RepositorioPedido repositorio = Mockito.mock(RepositorioPedido.class);
 		Mockito.when(repositorio.crear(pedido)).thenReturn(pedido);

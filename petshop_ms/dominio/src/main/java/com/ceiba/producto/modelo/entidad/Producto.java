@@ -1,18 +1,21 @@
 package com.ceiba.producto.modelo.entidad;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NonNull;
 
 @Getter
+@AllArgsConstructor
 public class Producto {
-    private Long id;
-    private String nombre;
-    private MarcaProducto marca;
-    private CategoriaProducto categoriaProducto;
-    private Long precio;
-    private String presentacion;
-    private String foto;
-    private String descripcion;
-    private String caracteristicas;
-    private String beneficios;
-    private String codigoProducto;
+    @NonNull Long id;
+    @NonNull private String nombre;
+    @NonNull private MarcaProducto marca;
+    @NonNull private CategoriaProducto categoriaProducto;
+    @NonNull private Long precio;
+    @NonNull private String presentacion;
+    @NonNull private String foto;
+    @NonNull private String descripcion;
+    @NonNull private String caracteristicas;
+    @NonNull private String beneficios;
+    @NonNull private String codigoProducto;
 }
