@@ -1,7 +1,5 @@
 package com.ceiba.ciudad.modelo.entidad;
 
-import com.ceiba.pedido.modelo.entidad.Pedido;
-
 import lombok.Getter;
 
 @Getter

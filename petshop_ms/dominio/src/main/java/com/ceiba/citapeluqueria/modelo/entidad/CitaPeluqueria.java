@@ -1,6 +1,7 @@
 package com.ceiba.citapeluqueria.modelo.entidad;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import lombok.*;
@@ -28,7 +29,7 @@ public class CitaPeluqueria {
     	this.validarFechaInicio(fechaInicio);
     	this.id = id;
 		this.peluquero = peluquero;
-		this.servicios = servicios;
+		this.servicios = Collections.unmodifiableList(servicios);
 		this.fechaInicio = fechaInicio;
 		this.fechaFinal = this.estimarFechaFinal(fechaInicio, pesoMascota);
 		this.usuario = usuario;
@@ -36,6 +37,10 @@ public class CitaPeluqueria {
 		this.pesoMascota = pesoMascota;
 		this.costoCita = this.calcularPrecio();
 	}
+    
+    public Date getFechaInicio() {
+    	return new Date(this.fechaInicio.getTime());
+    }
 
 	private void validarFechaInicio(Date fechaInicio) throws FechaInicioCitaInvalidaException {
 		if(fechaInicio.compareTo(new Date()) < 0) throw new FechaInicioCitaInvalidaException();

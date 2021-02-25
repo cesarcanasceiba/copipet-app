@@ -15,6 +15,14 @@ public class BonoDescuento {
 		this.finVigencia = finVigencia;
 		this.descuento = this.getDescuento(descuento);
 	}
+    
+    public Date getInicioVigencia() {
+    	return new Date(this.inicioVigencia.getTime());
+    }
+    
+    public Date getFinVigencia() {
+    	return new Date(this.finVigencia.getTime());
+    }
 
     private Float getDescuento(Float descuento) {
 		if(descuento == null) {
