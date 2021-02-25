@@ -11,8 +11,8 @@ public class BonoDescuento {
     public BonoDescuento(Long id, @NonNull String codigo, @NonNull Date inicioVigencia, @NonNull Date finVigencia, Float descuento) {
 	    this.id = id;
         this.codigo = codigo;
-		this.inicioVigencia = inicioVigencia;
-		this.finVigencia = finVigencia;
+		this.inicioVigencia = new Date(inicioVigencia.getTime());
+		this.finVigencia = new Date(finVigencia.getTime());
 		this.descuento = this.getDescuento(descuento);
 	}
     

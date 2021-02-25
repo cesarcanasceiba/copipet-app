@@ -30,7 +30,7 @@ public class CitaPeluqueria {
     	this.id = id;
 		this.peluquero = peluquero;
 		this.servicios = Collections.unmodifiableList(servicios);
-		this.fechaInicio = fechaInicio;
+		this.fechaInicio = new Date(fechaInicio.getTime());
 		this.fechaFinal = this.estimarFechaFinal(fechaInicio, pesoMascota);
 		this.usuario = usuario;
 		this.fotoMascota = fotoMascota;

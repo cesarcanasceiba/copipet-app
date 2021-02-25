@@ -1,5 +1,6 @@
 package com.ceiba.pedido.modelo.entidad;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import lombok.*;
@@ -31,11 +32,15 @@ public class Pedido {
 		this.validarListasCitasProductosNoVacios(citasPeluqueria, productos);
 		this.validarFechaPedido(fechaEntrega);
 		this.id = id;
-		this.productos = productos;
-		this.citasPeluqueria = citasPeluqueria;
+		this.productos = Collections.unmodifiableList(productos);
+		this.citasPeluqueria = Collections.unmodifiableList(citasPeluqueria);
 		this.bonoDescuento = bonoDescuento;
-		this.fechaEntrega = fechaEntrega;
+		this.fechaEntrega = new Date(fechaEntrega.getTime());
 		this.costoTotal = this.definirCostoTotal(productos, citasPeluqueria, tipoMoneda, conversorMoneda);
+	}
+
+	public Date getFechaEntrega() {
+		return new Date(this.fechaEntrega.getTime());
 	}
 
 	/**
