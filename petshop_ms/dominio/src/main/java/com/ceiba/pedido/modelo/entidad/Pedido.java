@@ -152,10 +152,14 @@ public class Pedido {
 
 	@Override
 	public boolean equals(Object other) {
-		if(other == null) {
-			return false;
-		}else {
-			return this.id.equals(((Pedido) other).id);
-		}
+		if(other == null) return false;
+		if (this.getClass() != other.getClass()) return false;
+		Pedido instance = (Pedido) other;
+		return this.id.equals(instance.id);
 	}
+
+	@Override
+    public int hashCode() {
+      return super.hashCode();
+    }
 }

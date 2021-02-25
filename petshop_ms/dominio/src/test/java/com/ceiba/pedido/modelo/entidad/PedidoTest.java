@@ -27,6 +27,15 @@ import com.ceiba.producto.modelo.entidad.Producto;
 import com.ceiba.producto.testdatabuilder.ProductoTestDataBuilder;
 
 class PedidoTest {
+	
+	@Test
+	void comparaPedidosIguales() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException, FechaInicioCitaInvalidaException {
+		Pedido p1 = new PedidoTestDataBuilder().build();
+		Pedido p2 = new PedidoTestDataBuilder().setId(2L).build();
+		
+		assertNotEquals(p1, p2);
+		
+	}
 
 	@Test
 	void pedidoSinValoresValidosProductosCitasTest() {

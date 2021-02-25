@@ -1,5 +1,7 @@
 package com.ceiba.ciudad.modelo.entidad;
 
+import com.ceiba.pedido.modelo.entidad.Pedido;
+
 import lombok.Getter;
 
 @Getter
@@ -10,8 +12,18 @@ public class Ciudad {
 	}
 	private Long id;
     private String nombre;
-    
-    public boolean equals(Ciudad other) {
-    	return this.id.equals(other.getId());
+
+    @Override
+    public int hashCode() {
+      return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+    	if(other == null) return false;
+		
+		if (this.getClass() != other.getClass()) return false;
+		Ciudad instance = (Ciudad) other;    	
+    	return this.id.equals(instance.getId());
     }
 }
