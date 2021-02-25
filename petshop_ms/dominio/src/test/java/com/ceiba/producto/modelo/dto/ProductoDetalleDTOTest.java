@@ -10,10 +10,22 @@ class ProductoDetalleDTOTest {
 
 	@Test
 	void validarExpecionNulo() {
-		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder().setBeneficios(null);
+		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
+				.setCategoriaProducto(null)
+				.setCodigoProducto(null)
+				.setBeneficios(null)
+				.setCaracteristicas(null)
+				.setDescripcion(null)
+				.setFoto(null)
+				.setPresentacion(null)
+				.setPrecio(null)
+				.setMarca(null)
+				.setNombre(null)
+				.setId(null)
+				;
 		assertThrows(NullPointerException.class, ()->pr.build());
 	}
-	
+
 	@Test
 	void beneficios() {
 		ProductoDetalleDTO pr = new ProductoDetalleTestDataBuilder().build();
@@ -48,5 +60,35 @@ class ProductoDetalleDTOTest {
 	void getMarca() {
 		ProductoDetalleDTO pr = new ProductoDetalleTestDataBuilder().build();
 		assertNotNull(pr.getMarca());
+	}
+	
+	@Test
+	void getId() {
+		ProductoDetalleDTO pr = new ProductoDetalleTestDataBuilder().build();
+		assertNotNull(pr.getId());
+	}
+	
+	@Test
+	void getPrecio() {
+		ProductoDetalleDTO pr = new ProductoDetalleTestDataBuilder().build();
+		assertNotNull(pr.getPrecio());
+	}
+	
+	@Test
+	void getNombre() {
+		ProductoDetalleDTO pr = new ProductoDetalleTestDataBuilder().build();
+		assertNotNull(pr.getNombre());
+	}
+	
+	@Test
+	void getPresentacion() {
+		ProductoDetalleDTO pr = new ProductoDetalleTestDataBuilder().build();
+		assertNotNull(pr.getPresentacion());
+	}
+	
+	@Test
+	void getFoto() {
+		ProductoDetalleDTO pr = new ProductoDetalleTestDataBuilder().build();
+		assertNotNull(pr.getFoto());
 	}
 }
