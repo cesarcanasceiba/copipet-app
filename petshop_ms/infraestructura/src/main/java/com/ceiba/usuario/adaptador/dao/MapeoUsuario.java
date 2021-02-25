@@ -17,5 +17,4 @@ public class MapeoUsuario implements RowMapper<DtoUsuario>, MapperResult {
         String clave = resultSet.getString("clave");
         return new DtoUsuario(rowNum, nombre, clave, clave, nombre, false, clave, rowNum);
     }
-
 }

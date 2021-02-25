@@ -1,8 +1,6 @@
 package com.ceiba.usuario.testdatabuilder;
 
 import com.ceiba.TestDataBuilderInterface;
-import com.ceiba.ciudad.modelo.entidad.Ciudad;
-import com.ceiba.mascota.modelo.entidad.TipoMascota;
 import com.ceiba.usuario.modelo.dto.DtoUsuario;
 
 public class UsuarioDtoTestDataBuilder implements TestDataBuilderInterface<DtoUsuario>{
@@ -13,17 +11,17 @@ public class UsuarioDtoTestDataBuilder implements TestDataBuilderInterface<DtoUs
 	private String direccion;
 	private String telefono;
 	private boolean aceptaTerminos;
-	private long ciudad;
+	private String ciudad;
 	private long tipoMascota;
 
-	public void UsuarioTestDataBuilder() {
+	public UsuarioDtoTestDataBuilder() {
 		this.id = 1L;
-	    nombreUsuario = "1234";
-	    clave = "1234";
+	    this.nombreUsuario = "1234";
+	    this.clave = "1234";
 	    this.direccion = "Dir base";
 	    this.telefono = "132312";
 	    this.aceptaTerminos = true;
-	    this.ciudad = 1L;
+	    this.ciudad = "Bogota";
 	    this.tipoMascota = 1L;
     }
 
@@ -32,18 +30,43 @@ public class UsuarioDtoTestDataBuilder implements TestDataBuilderInterface<DtoUs
 	    return this;
 	}
 	
-	public UsuarioDtoTestDataBuilder setCiudad(Long ciudad) {
+	public UsuarioDtoTestDataBuilder setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 		return this;
 	}
 	
+	public UsuarioDtoTestDataBuilder setId(long id) {
+		this.id = id;
+		return this;
+	}
+
+	public UsuarioDtoTestDataBuilder setClave(String clave) {
+		this.clave = clave;
+		return this;
+	}
+
+	public UsuarioDtoTestDataBuilder setDireccion(String direccion) {
+		this.direccion = direccion;
+		return this;
+	}
+
+	public UsuarioDtoTestDataBuilder setTelefono(String telefono) {
+		this.telefono = telefono;
+		return this;
+	}
+
+	public UsuarioDtoTestDataBuilder setTipoMascota(long tipoMascota) {
+		this.tipoMascota = tipoMascota;
+		return this;
+	}
+
 	public UsuarioDtoTestDataBuilder setAceptaTerminos(boolean aceptaTerminos) {
 		this.aceptaTerminos = aceptaTerminos;
 		return this;
 	}
 	@Override
 	public DtoUsuario build() {
-		return new DtoUsuario(id, nombreUsuario, clave, direccion, telefono, aceptaTerminos, clave, tipoMascota);
+		return new DtoUsuario(id, nombreUsuario, clave, direccion, telefono, aceptaTerminos, ciudad, tipoMascota);
 	}
 
 }
