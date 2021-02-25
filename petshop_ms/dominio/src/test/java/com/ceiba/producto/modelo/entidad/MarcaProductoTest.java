@@ -1,11 +1,8 @@
 package com.ceiba.producto.modelo.entidad;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-
 import com.ceiba.producto.testdatabuilder.MarcaProductoTestDataBuilder;
-import com.ceiba.producto.testdatabuilder.ProductoTestDataBuilder;
 
 class MarcaProductoTest {
 

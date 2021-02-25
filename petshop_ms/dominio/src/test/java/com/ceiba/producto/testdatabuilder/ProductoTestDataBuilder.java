@@ -4,8 +4,6 @@ import com.ceiba.producto.modelo.entidad.CategoriaProducto;
 import com.ceiba.producto.modelo.entidad.MarcaProducto;
 import com.ceiba.producto.modelo.entidad.Producto;
 
-import lombok.NonNull;
-
 public class ProductoTestDataBuilder {
     Long id;
     private String nombre;

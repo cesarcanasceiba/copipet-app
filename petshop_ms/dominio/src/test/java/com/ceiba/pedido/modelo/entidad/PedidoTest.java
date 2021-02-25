@@ -11,8 +11,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
 import com.ceiba.citapeluqueria.exception.FechaInicioCitaInvalidaException;
 import com.ceiba.citapeluqueria.exception.PesoNoAceptadoException;
 import com.ceiba.citapeluqueria.modelo.entidad.CitaPeluqueria;

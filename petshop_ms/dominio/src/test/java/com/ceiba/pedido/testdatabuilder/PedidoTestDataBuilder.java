@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import org.mockito.Mockito;
-
 import com.ceiba.citapeluqueria.exception.FechaInicioCitaInvalidaException;
 import com.ceiba.citapeluqueria.exception.PesoNoAceptadoException;
 import com.ceiba.citapeluqueria.modelo.entidad.CitaPeluqueria;
@@ -26,7 +24,6 @@ public class PedidoTestDataBuilder {
     private List<Producto> productos;
     private List<CitaPeluqueria> citasPeluqueria;
     private BonoDescuento bonoDescuento;
-    private Long costoTotal;
     private Date fechaEntrega;
     private TipoMoneda currency;
 	private ConversorMonedaInterface currencyConverter;
