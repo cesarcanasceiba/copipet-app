@@ -9,21 +9,86 @@ import com.ceiba.pedido.testdatabuilder.ProductoDetalleTestDataBuilder;
 class ProductoDetalleDTOTest {
 
 	@Test
-	void validarExpecionNulo() {
+	void validarExpecionNuloId() {
 		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
-				.setCategoriaProducto(null)
-				.setCodigoProducto(null)
-				.setBeneficios(null)
-				.setCaracteristicas(null)
-				.setDescripcion(null)
-				.setFoto(null)
-				.setPresentacion(null)
-				.setPrecio(null)
-				.setMarca(null)
-				.setNombre(null)
-				.setId(null)
-				;
+				.setId(null);
 		assertThrows(NullPointerException.class, ()->pr.build());
+	}
+	
+	@Test
+	void validarExpecionNuloNombre() {
+		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
+				.setNombre(null);
+		assertThrows(NullPointerException.class, ()->pr.build());
+	}
+	
+	@Test
+	void validarExpecionNuloMarca() {
+		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
+				.setMarca(null);
+		assertThrows(NullPointerException.class, ()->pr.build());
+	}
+	
+	@Test
+	void validarExpecionNuloPrecio() {
+		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
+				.setPrecio(null);
+		assertThrows(NullPointerException.class, ()->pr.build());
+	}
+	
+	@Test
+	void validarExpecionNuloPresentacion() {
+		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
+				.setPresentacion(null);
+		assertThrows(NullPointerException.class, ()->pr.build());
+	}
+	
+	@Test
+	void validarExpecionNuloFoto() {
+		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
+				.setFoto(null);
+		assertThrows(NullPointerException.class, ()->pr.build());
+	}
+	
+	@Test
+	void validarExpecionNuloDescripcion() {
+		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
+				.setDescripcion(null);
+		assertThrows(NullPointerException.class, ()->pr.build());
+	}
+	
+	@Test
+	void validarExpecionNuloCaracteristicas() {
+		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
+				.setCaracteristicas(null);
+		assertThrows(NullPointerException.class, ()->pr.build());
+	}
+	
+	@Test
+	void validarExpecionNuloBeneficios() {
+		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
+				.setBeneficios(null);
+		assertThrows(NullPointerException.class, ()->pr.build());
+	}
+	
+	@Test
+	void validarExpecionNuloCodigoProducto() {
+		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
+				.setCodigoProducto(null);
+		assertThrows(NullPointerException.class, ()->pr.build());
+	}
+	
+	@Test
+	void validarExpecionNuloCategoriaProducto() {
+		ProductoDetalleTestDataBuilder pr = new ProductoDetalleTestDataBuilder()
+				.setCategoriaProducto(null);
+		assertThrows(NullPointerException.class, ()->pr.build());
+	}
+	
+	@Test
+	void validarCrearInstancia() {
+		ProductoDetalleDTO pr = new ProductoDetalleTestDataBuilder().build();
+		assertNotNull(pr);
 	}
 
 	@Test
