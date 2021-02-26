@@ -18,9 +18,13 @@ public class Ciudad {
 
     @Override
     public boolean equals(Object other) {
-    	if(other == null) return false;
+    	if(other == null) {
+    		return false;
+    	}
 		
-		if (this.getClass() != other.getClass()) return false;
+		if (this.getClass() != other.getClass()) {
+			return false;
+		}
 		Ciudad instance = (Ciudad) other;    	
     	return this.id.equals(instance.getId());
     }

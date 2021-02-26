@@ -15,5 +15,17 @@ class BonoDescuentoTest {
 		assertThrows(DescuentoFueraRangoException.class, ()->bono.build(), "Bono con rango de descuento incorrecto");
 		
 	}
+	
+	@Test
+	void validarDescuentoNulo() {
+		BonoDescuento bono = new BonoDescuentoTestDataBuilder().setDescuento(null).build();
+		assertEquals(0F,bono.getDescuento());
+	}
+	
+	@Test
+	void bonoMenorO() {
+		BonoDescuentoTestDataBuilder bono = new BonoDescuentoTestDataBuilder().setDescuento(-1F);
+		assertThrows(DescuentoFueraRangoException.class, ()->bono.build(), "Bono con rango de descuento incorrecto");
+	}
 
 }

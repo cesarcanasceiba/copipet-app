@@ -12,7 +12,7 @@ public class BonoDescuentoTestDataBuilder implements TestDataBuilderInterface<Bo
 	private String codigo;
 	private Date inicioVigencia;
 	private Date finVigencia;
-	private float descuento;
+	private Float descuento;
 
 	public BonoDescuentoTestDataBuilder() {
 		Calendar cal = Calendar.getInstance();
@@ -47,7 +47,7 @@ public class BonoDescuentoTestDataBuilder implements TestDataBuilderInterface<Bo
 		return this;
 	}
 
-	public BonoDescuentoTestDataBuilder setDescuento(float descuento) {
+	public BonoDescuentoTestDataBuilder setDescuento(Float descuento) {
 		this.descuento = descuento;
 		return this;
 	}
