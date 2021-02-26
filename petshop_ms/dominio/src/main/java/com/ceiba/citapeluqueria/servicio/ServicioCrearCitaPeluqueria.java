@@ -21,12 +21,17 @@ public class ServicioCrearCitaPeluqueria {
         this.validarSimultaneidadCita();
 		return this.repositorio.crear(cita);
     }
+
 	private void validarSimultaneidadCita() throws CitasSimultaneasException {
-		if(this.repositorio.existenCitasSimultaneas()) throw new CitasSimultaneasException();
-		
+		if(this.repositorio.existenCitasSimultaneas()) {
+			throw new CitasSimultaneasException();			
+		}
 	}
+
 	private void validarCiudad(Ciudad ciudad) throws CiudadNoValidaParaCita {
 	    Ciudad bogotaCiudad = this.ciudadValida.get();
-	    if (!bogotaCiudad.equals(ciudad)) throw new CiudadNoValidaParaCita();
+	    if (!bogotaCiudad.equals(ciudad)) {
+	    	throw new CiudadNoValidaParaCita();
+	    }
 	}
 }
