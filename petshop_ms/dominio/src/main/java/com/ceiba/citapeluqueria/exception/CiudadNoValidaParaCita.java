@@ -1,6 +1,6 @@
 package com.ceiba.citapeluqueria.exception;
 
-public class CiudadNoValidaParaCita extends Exception {
+public class CiudadNoValidaParaCita extends RuntimeException {
 
 	/**
 	 * 
