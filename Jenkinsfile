@@ -8,6 +8,7 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '3'))
         disableConcurrentBuilds()
+        timeout(time: 15, unit: 'MINUTES')
     }
 
     //Una sección que define las herramientas “preinstaladas” en Jenkins

@@ -43,12 +43,12 @@ public class CitaPeluqueria {
     }
 
 	private void validarFechaInicio(Date fechaInicio) throws FechaInicioCitaInvalidaException {
-		if(fechaInicio.compareTo(new Date()) < 0) throw new FechaInicioCitaInvalidaException();
+		if(fechaInicio.compareTo(new Date()) < 0) {
+			throw new FechaInicioCitaInvalidaException();
+		}
 	}
 
-
-
-	public Long calcularPrecio() throws PesoNoAceptadoException {
+	private Long calcularPrecio() throws PesoNoAceptadoException {
     	if(this.pesoMascota == 2 || isBetween(this.pesoMascota, 2, 4.5)) {
     		return 35000L;
     	}else if(isBetween(this.pesoMascota, 4.5, 10)) {

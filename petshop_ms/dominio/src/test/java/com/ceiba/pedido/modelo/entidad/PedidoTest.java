@@ -29,6 +29,16 @@ import com.ceiba.producto.testdatabuilder.ProductoTestDataBuilder;
 class PedidoTest {
 	
 	@Test
+	void verificarCopiaFecha() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException, FechaInicioCitaInvalidaException {
+		Calendar cl = Calendar.getInstance();
+		cl.setTime(new Date());
+		cl.add(Calendar.HOUR_OF_DAY, 4);
+		Date fechaPrueba = cl.getTime();
+		Pedido pedido = new PedidoTestDataBuilder().setFechaEntrega(fechaPrueba).build();
+		assertNotSame(fechaPrueba, pedido.getFechaEntrega());
+	}
+	
+	@Test
 	void comparaPedidosIguales() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException, FechaInicioCitaInvalidaException {
 		Pedido p1 = new PedidoTestDataBuilder().build();
 		Pedido p2 = new PedidoTestDataBuilder().setId(2L).build();

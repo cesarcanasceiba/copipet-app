@@ -66,13 +66,7 @@ public class Pedido {
 
 		costoCalculado = costoCalculado + citas
 				.stream()
-				.map(t -> {
-					try {
-						return t.calcularPrecio();
-					} catch (PesoNoAceptadoException e) {
-						return null;
-					}
-				})
+				.map(t ->  t.getCostoCita())
 				.reduce((precio, acc)->precio + acc)
 				.orElseThrow(PedidoConListasVaciasException::new);
 		
@@ -157,8 +151,12 @@ public class Pedido {
 
 	@Override
 	public boolean equals(Object other) {
-		if(other == null) return false;
-		if (this.getClass() != other.getClass()) return false;
+		if(other == null) {
+			return false;
+		}
+		if (this.getClass() != other.getClass()) {
+			return false;
+		}
 		Pedido instance = (Pedido) other;
 		return this.id.equals(instance.id);
 	}

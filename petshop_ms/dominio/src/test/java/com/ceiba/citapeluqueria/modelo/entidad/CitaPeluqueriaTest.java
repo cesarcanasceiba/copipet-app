@@ -66,7 +66,7 @@ class CitaPeluqueriaTest {
         
 		assertEquals(
 				0,
-				cita.calcularPrecio().compareTo(precio),
+				cita.getCostoCita().compareTo(precio),
 				"El precio se calcul� incorrectamente");
 	}
 	
