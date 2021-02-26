@@ -27,8 +27,7 @@ public class Pedido {
 	private ConversorMonedaInterface conversorMoneda;
     private Long costoTotal;
 
-	public Pedido(Long id, List<Producto> productos, List<CitaPeluqueria> citasPeluqueria, BonoDescuento bonoDescuento, @NonNull Date fechaEntrega, @NonNull TipoMoneda tipoMoneda, ConversorMonedaInterface conversorMoneda) throws PedidoConListasVaciasException, PedidoSinElementosException, FechaDePedidoInvalidaException, ConverterNoImplementadoException {
-		this.validarCitasProductosPedido(citasPeluqueria, productos);
+	public Pedido(Long id, @NonNull List<Producto> productos, @NonNull List<CitaPeluqueria> citasPeluqueria, BonoDescuento bonoDescuento, @NonNull Date fechaEntrega, @NonNull TipoMoneda tipoMoneda, ConversorMonedaInterface conversorMoneda) throws PedidoConListasVaciasException, PedidoSinElementosException, FechaDePedidoInvalidaException, ConverterNoImplementadoException {
 		this.validarListasCitasProductosNoVacios(citasPeluqueria, productos);
 		this.validarFechaPedido(fechaEntrega);
 		this.id = id;
@@ -61,15 +60,13 @@ public class Pedido {
 					}else {
 						return precio;
 					}
-				})
-				.orElseThrow(PedidoConListasVaciasException::new);
+				}).orElse(0L);
 
 		costoCalculado = costoCalculado + citas
 				.stream()
-				.map(t ->  t.getCostoCita())
+				.map(CitaPeluqueria::getCostoCita)
 				.reduce((precio, acc)->precio + acc)
-				.orElseThrow(PedidoConListasVaciasException::new);
-		
+				.orElse(0L);
 		return costoCalculado;
 	}
     
@@ -96,38 +93,25 @@ public class Pedido {
      */
 	private void validarFechaPedido(Date fechaEntrega) throws FechaDePedidoInvalidaException {
 		Date current = new Date();
-		if(current.compareTo(fechaEntrega) > 0) throw new FechaDePedidoInvalidaException();
+		if(current.compareTo(fechaEntrega) > 0) {
+			throw new FechaDePedidoInvalidaException();
+		}
 		
 	}
-
-
-	/*
-	 * Valida si las el pedido creado tiene citas y productos asociados
-	 */
-	private void validarCitasProductosPedido(List<CitaPeluqueria> citas, List<Producto> productos) throws PedidoSinElementosException  {
-		if(citas == null && productos == null) throw new PedidoSinElementosException();
-	}
-	
 	
 	/**
 	 * Valida si las listas de productos y citas son no vacíos
 	 * @param citas
 	 * @param productos
-	 * @throws PedidoConListasVaciasException 
-	 * @throws PedidoSinElementosException 
+	 * @throws PedidoConListasVaciasException
 	 * @throws Exception
 	 */
-	private void validarListasCitasProductosNoVacios(List<CitaPeluqueria> citas, List<Producto> productos) throws PedidoConListasVaciasException, PedidoSinElementosException  {
-		
-		if(citas == null && productos == null) {
-			throw new PedidoSinElementosException();
-		}else {
-			if (citas != null && productos != null && citas.isEmpty() && productos.isEmpty()) {
-				throw new PedidoConListasVaciasException();	
-		    }
-		}
+	private void validarListasCitasProductosNoVacios(List<CitaPeluqueria> citas, List<Producto> productos) throws PedidoConListasVaciasException  {
+		if (citas.isEmpty() && productos.isEmpty()) {
+			throw new PedidoConListasVaciasException();	
+	    }
 	}
-	
+
 	/**
 	 * Realiza la conversión de moneda en caso de que el pago llegue en dolares
 	 * @param costoTotal

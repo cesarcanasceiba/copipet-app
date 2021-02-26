@@ -44,14 +44,13 @@ class PedidoTest {
 		Pedido p2 = new PedidoTestDataBuilder().setId(2L).build();
 		
 		assertNotEquals(p1, p2);
-		
 	}
 
 	@Test
 	void pedidoSinValoresValidosProductosCitasTest() {
 		final Date fechaPrueba = new Date();
 		assertThrows(
-				PedidoSinElementosException.class,
+				NullPointerException.class,
 				()->new PedidoTestDataBuilder()
 					.setProductos(null)
 					.setCitasPeluqueria(null)
@@ -189,5 +188,52 @@ class PedidoTest {
 		assertEquals(
 				expected, instance.getCostoTotal(),
 				"El pedido hace descuentos con un bono de fecha inválida");
+	}
+	
+	@Test
+	void metodoEqualsSobreNull() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException, FechaInicioCitaInvalidaException {
+		Pedido pedido = new PedidoTestDataBuilder().build();
+		Object other = null;
+		boolean result = pedido.equals(other);
+		assertFalse(result);
+		
+	}
+	
+	@Test
+	void metodoEqualsSobreObjetoDiferenteClase() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException, FechaInicioCitaInvalidaException {
+		Pedido pedido = new PedidoTestDataBuilder().build();
+		Object other = "objeto String";
+		boolean result = pedido.equals(other);
+		assertFalse(result);
+	}
+	
+	@Test
+	void testHashCode() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException, FechaInicioCitaInvalidaException {
+		Pedido pedido = new PedidoTestDataBuilder().build();
+		assertNotEquals(0, pedido.hashCode());
+	}
+	
+	@Test
+	void pedidoSinProductosValido() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException, FechaInicioCitaInvalidaException {
+		PedidoTestDataBuilder pedido = new PedidoTestDataBuilder().setProductos(null);
+		assertThrows(NullPointerException.class,()->pedido.build());
+	}
+	
+	@Test
+	void pedidosinCitasValido() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException, FechaInicioCitaInvalidaException {
+		PedidoTestDataBuilder pedido = new PedidoTestDataBuilder().setCitasPeluqueria(null);
+		assertThrows(NullPointerException.class,()->pedido.build());
+	}
+	
+	@Test
+	void pedidosinValidoSinCitasNiProductos() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException, FechaInicioCitaInvalidaException {
+		PedidoTestDataBuilder pedido = new PedidoTestDataBuilder().setCitasPeluqueria(new ArrayList<>()).setProductos(new ArrayList<>());
+		assertThrows(PedidoConListasVaciasException.class,()->pedido.build());
+	}
+	
+	@Test
+	void pedidosinValidoSinCitas() throws PedidoSinElementosException, PedidoConListasVaciasException, FechaDePedidoInvalidaException, ConverterNoImplementadoException, PesoNoAceptadoException, ParseException, FechaInicioCitaInvalidaException {
+		PedidoTestDataBuilder pedido = new PedidoTestDataBuilder().setCitasPeluqueria(new ArrayList<>());
+		assertDoesNotThrow(()->pedido.build());
 	}
 }
