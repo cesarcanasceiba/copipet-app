@@ -1,6 +1,6 @@
 package com.ceiba.citapeluqueria.exception;
 
-public class FechaInicioCitaInvalidaException extends Exception {
+public class FechaInicioCitaInvalidaException extends RuntimeException {
 
 	/**
 	 * 

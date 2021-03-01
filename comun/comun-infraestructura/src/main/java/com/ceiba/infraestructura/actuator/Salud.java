@@ -21,5 +21,4 @@ public interface Salud  {
 	 * @throws ExepcionBloqueSinServicio
 	 */
 	public void verificar() throws ExcepcionTecnica;//a�adir
-
 }

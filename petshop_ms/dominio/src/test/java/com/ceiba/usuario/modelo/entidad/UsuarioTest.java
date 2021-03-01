@@ -9,19 +9,15 @@ import com.ceiba.usuario.testdatabuilder.UsuarioTestDataBuilder;
 class UsuarioTest {
 
 	@Test
-    void usuarioValidaTerminosYCondiciones() {
-    	
-        assertThrows(
-        		UsuarioNoAceptaTerminosException.class,
-        		()->new UsuarioTestDataBuilder().conAceptaTerminos(false).build(),
-        		"");
-    }
-	
+	void usuarioValidaTerminosYCondiciones() {
+
+		assertThrows(UsuarioNoAceptaTerminosException.class,
+				() -> new UsuarioTestDataBuilder().conAceptaTerminos(false).build(), "");
+	}
+
 	@Test
-    void generaInstanciaUsuario() {
-    	
-        assertDoesNotThrow(
-        		()->new UsuarioTestDataBuilder().build(),
-        		"NO se generÛ el usuario");
-    }
+	void generaInstanciaUsuario() {
+
+		assertDoesNotThrow(() -> new UsuarioTestDataBuilder().build(), "NO se gener√≥ el usuario");
+	}
 }

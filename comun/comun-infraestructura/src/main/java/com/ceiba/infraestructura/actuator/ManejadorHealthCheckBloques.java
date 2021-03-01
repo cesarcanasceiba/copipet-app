@@ -47,5 +47,4 @@ public class ManejadorHealthCheckBloques {
 	public List<ErrorHealthCheck> getListadoErroresBloques() {
 		return listadoErroresBloques;
 	}
-
 }

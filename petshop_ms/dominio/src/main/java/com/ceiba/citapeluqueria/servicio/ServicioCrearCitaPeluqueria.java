@@ -8,30 +8,33 @@ import com.ceiba.citapeluqueria.servicio.generadorciudad.GeneradorCiudadValidaCi
 import com.ceiba.ciudad.modelo.entidad.Ciudad;
 
 public class ServicioCrearCitaPeluqueria {
-	
+
 	private RepositorioCitaPeluqueria repositorio;
 	private GeneradorCiudadValidaCitaPeluqueria ciudadValida;
-	
-	public ServicioCrearCitaPeluqueria(RepositorioCitaPeluqueria repositorio, GeneradorCiudadValidaCitaPeluqueria ciudadValida) {
+
+	public ServicioCrearCitaPeluqueria(RepositorioCitaPeluqueria repositorio,
+			GeneradorCiudadValidaCitaPeluqueria ciudadValida) {
 		this.repositorio = repositorio;
 		this.ciudadValida = ciudadValida;
 	}
-	public CitaPeluqueria ejecutar(CitaPeluqueria cita, Ciudad ciudad) throws CiudadNoValidaParaCita, CitasSimultaneasException {
-        this.validarCiudad(ciudad);
-        this.validarSimultaneidadCita();
+
+	public CitaPeluqueria ejecutar(CitaPeluqueria cita, Ciudad ciudad)
+			throws CiudadNoValidaParaCita, CitasSimultaneasException {
+		this.validarCiudad(ciudad);
+		this.validarSimultaneidadCita();
 		return this.repositorio.crear(cita);
-    }
+	}
 
 	private void validarSimultaneidadCita() throws CitasSimultaneasException {
-		if(this.repositorio.existenCitasSimultaneas()) {
-			throw new CitasSimultaneasException();			
+		if (this.repositorio.existenCitasSimultaneas()) {
+			throw new CitasSimultaneasException();
 		}
 	}
 
 	private void validarCiudad(Ciudad ciudad) throws CiudadNoValidaParaCita {
-	    Ciudad bogotaCiudad = this.ciudadValida.get();
-	    if (!bogotaCiudad.equals(ciudad)) {
-	    	throw new CiudadNoValidaParaCita();
-	    }
+		Ciudad bogotaCiudad = this.ciudadValida.get();
+		if (!bogotaCiudad.equals(ciudad)) {
+			throw new CiudadNoValidaParaCita();
+		}
 	}
 }

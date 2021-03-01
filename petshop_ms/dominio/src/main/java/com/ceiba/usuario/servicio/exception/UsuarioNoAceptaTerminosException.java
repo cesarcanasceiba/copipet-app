@@ -1,6 +1,6 @@
 package com.ceiba.usuario.servicio.exception;
 
-public class UsuarioNoAceptaTerminosException extends Exception{
+public class UsuarioNoAceptaTerminosException extends RuntimeException {
 
 	/**
 	 * 

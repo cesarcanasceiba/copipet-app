@@ -28,9 +28,4 @@ public class ErrorHealthCheck {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	
-	
-	
-
 }

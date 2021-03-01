@@ -4,6 +4,8 @@ import com.ceiba.ComandoRespuesta;
 import com.ceiba.manejador.ManejadorComandoRespuesta;
 import com.ceiba.usuario.modelo.entidad.Usuario;
 import com.ceiba.usuario.servicio.ServicioCrearUsuario;
+import com.ceiba.usuario.servicio.exception.UsuarioNoAceptaTerminosException;
+
 import org.springframework.stereotype.Component;
 
 import com.ceiba.usuario.comando.ComandoUsuario;
@@ -20,8 +22,9 @@ public class ManejadorCrearUsuario implements ManejadorComandoRespuesta<ComandoU
         this.servicioCrearUsuario = servicioCrearUsuario;
     }
 
-    public ComandoRespuesta<Long> ejecutar(ComandoUsuario comandoUsuario) {
+    public ComandoRespuesta<Long> ejecutar(ComandoUsuario comandoUsuario) throws UsuarioNoAceptaTerminosException {
         Usuario usuario = this.fabricaUsuario.crear(comandoUsuario);
-        return new ComandoRespuesta<>(this.servicioCrearUsuario.ejecutar(usuario));
+        Long idNuevoUsuario = this.servicioCrearUsuario.ejecutar(usuario).getId();
+        return new ComandoRespuesta<>(idNuevoUsuario);
     }
 }

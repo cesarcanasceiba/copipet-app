@@ -9,13 +9,14 @@ import com.ceiba.usuario.puerto.dao.DaoUsuario;
 import org.springframework.stereotype.Component;
 
 import com.ceiba.usuario.modelo.dto.DtoUsuario;
+import com.ceiba.usuario.modelo.entidad.Usuario;
 
 @Component
 public class DaoUsuarioMysql implements DaoUsuario {
 
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
-    @SqlStatement(namespace="usuario", value="listar")
+    @SqlStatement(namespace = "usuario", value = "listar")
     private static String sqlListar;
 
     public DaoUsuarioMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
@@ -24,6 +25,19 @@ public class DaoUsuarioMysql implements DaoUsuario {
 
     @Override
     public List<DtoUsuario> listar() {
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar, new MapeoUsuario());
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar,
+                new MapeoUsuario());
+    }
+
+    @Override
+    public Usuario encontrarPorId(Long id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public DtoUsuario recuperarUsuarioDto(Long id) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

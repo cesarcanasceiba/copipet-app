@@ -1,6 +1,6 @@
 package com.ceiba.citapeluqueria.exception;
 
-public class PesoNoAceptadoException extends Exception{
+public class PesoNoAceptadoException extends RuntimeException {
 
 	/**
 	 * 

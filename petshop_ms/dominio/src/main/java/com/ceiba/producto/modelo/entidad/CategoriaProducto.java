@@ -5,6 +5,8 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 public class CategoriaProducto {
-    @NonNull private Long id;
-    @NonNull private String nombre;
+    @NonNull
+    private Long id;
+    @NonNull
+    private String nombre;
 }

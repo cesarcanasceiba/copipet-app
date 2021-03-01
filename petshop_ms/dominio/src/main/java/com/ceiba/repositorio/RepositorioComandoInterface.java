@@ -1,9 +1,9 @@
 package com.ceiba.repositorio;
 
-
-public interface CommandRepositoryInterface<T> {
-	/**
+public interface RepositorioComandoInterface<T> {
+    /**
      * Crea un elemento del sistema
+     * 
      * @param entity
      * @return el elemento generado
      */
@@ -11,13 +11,8 @@ public interface CommandRepositoryInterface<T> {
 
     /**
      * Permite actualizar una entidad
+     * 
      * @param entity
      */
     void actualizar(T entity);
-
-    /**
-     * Permite eliminar una entidad
-     * @param entity
-     */
-    void eliminar(T entity);
 }

@@ -9,12 +9,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ComandoUsuario{
+public class ComandoUsuario {
 
-	private Long id;
+    private Long id;
     private String nombre;
-    private int ciudad;
-    private int tipoMascota;
+    private Long ciudad;
+    private Long tipoMascota;
     private String password;
     private String direccion;
     private String telefono;
