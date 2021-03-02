@@ -1,5 +1,6 @@
 package com.ceiba.citapeluqueria.comando.manejador;
 
+import com.ceiba.ComandoRespuesta;
 import com.ceiba.citapeluqueria.comando.ComandoCitaPeluqueria;
 import com.ceiba.citapeluqueria.comando.fabrica.FabricaCitaPeluqueria;
 import com.ceiba.citapeluqueria.modelo.entidad.CitaPeluqueria;
@@ -22,9 +23,10 @@ public class ManejadorCrearCitaPeluqueria {
         this.daoCiudad = daoCiudad;
     }
 
-    public Long ejecutar(ComandoCitaPeluqueria comandoCita) {
+    public ComandoRespuesta<Long> ejecutar(ComandoCitaPeluqueria comandoCita) {
         CitaPeluqueria cita = this.fabricaCitaPeluqueria.crear(comandoCita);
         Ciudad ciudad = this.daoCiudad.encontrarPorId(comandoCita.getCiudad());
-        return this.servicioCrearCitaPeluqueria.ejecutar(cita, ciudad).getId();
+        Long nuevoIdCita = this.servicioCrearCitaPeluqueria.ejecutar(cita, ciudad).getId();
+        return new ComandoRespuesta<Long>(nuevoIdCita);
     }
 }

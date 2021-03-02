@@ -5,13 +5,13 @@ import com.ceiba.pedido.puerto.repositorio.RepositorioPedido;
 
 public class ServicioCrearPedido {
     private final RepositorioPedido repositorioPedido;
-    
-    public ServicioCrearPedido(RepositorioPedido respositorioPedido) {
-    	this.repositorioPedido = respositorioPedido;
+
+    public ServicioCrearPedido(RepositorioPedido repositorioPedido) {
+        this.repositorioPedido = repositorioPedido;
     }
-    
+
     public Pedido ejecutar(Pedido pedido) {
-    	
-    	return this.repositorioPedido.crear(pedido);
+
+        return this.repositorioPedido.crear(pedido);
     }
 }

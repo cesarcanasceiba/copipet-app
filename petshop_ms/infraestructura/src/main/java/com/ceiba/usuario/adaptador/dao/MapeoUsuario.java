@@ -3,17 +3,35 @@ package com.ceiba.usuario.adaptador.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.ceiba.ciudad.modelo.entidad.Ciudad;
+import com.ceiba.ciudad.puerto.dao.DaoCiudad;
 import com.ceiba.infraestructura.jdbc.MapperResult;
-import com.ceiba.usuario.modelo.dto.DtoUsuario;
+import com.ceiba.mascota.modelo.entidad.TipoMascota;
+import com.ceiba.mascota.puerto.dao.DaoTipoMascota;
+import com.ceiba.usuario.modelo.entidad.Usuario;
+
 import org.springframework.jdbc.core.RowMapper;
 
-public class MapeoUsuario implements RowMapper<DtoUsuario>, MapperResult {
+public class MapeoUsuario implements RowMapper<Usuario>, MapperResult {
+
+    private DaoCiudad daoCiudad;
+    private DaoTipoMascota daoTipoMascota;
+
+    public MapeoUsuario(DaoCiudad daoCiudad, DaoTipoMascota daoTipoMascota) {
+        this.daoCiudad = daoCiudad;
+        this.daoTipoMascota = daoTipoMascota;
+    }
 
     @Override
-    public DtoUsuario mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-
-        String nombre = resultSet.getString("nombre");
-        String clave = resultSet.getString("clave");
-        return new DtoUsuario(rowNum, nombre, clave, nombre, false, clave, rowNum);
+    public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Long id = rs.getLong("id");
+        String nombre = rs.getString("nombre");
+        Ciudad ciudad = this.daoCiudad.encontrarPorId(rs.getLong("ciudadId"));
+        TipoMascota tipoMascota = this.daoTipoMascota.encontrarMascotaPorId(rs.getLong("tipoMascotaId"));
+        String password = rs.getString("password");
+        String direccion = rs.getString("direccion");
+        String telefono = rs.getString("telefono");
+        Boolean aceptaTerminos = rs.getBoolean("aceptaTerminos");
+        return new Usuario(id, nombre, ciudad, tipoMascota, password, direccion, telefono, aceptaTerminos);
     }
 }

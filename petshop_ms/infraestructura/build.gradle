@@ -15,6 +15,7 @@ dependencies {
 	testImplementation project.ext.h2
 	testImplementation project.ext.springboottest
 	implementation project.ext.springbootweb
+	implementation project.ext.springbootwebclient
 	implementation project.ext.swagger
 
 	implementation project.ext.apachecommons

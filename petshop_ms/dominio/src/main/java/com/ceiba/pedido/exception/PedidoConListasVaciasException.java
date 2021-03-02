@@ -1,6 +1,6 @@
 package com.ceiba.pedido.exception;
 
-public class PedidoConListasVaciasException extends Exception{
+public class PedidoConListasVaciasException extends RuntimeException {
 
 	/**
 	 * 

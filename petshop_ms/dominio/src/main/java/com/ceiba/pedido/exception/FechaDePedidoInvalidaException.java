@@ -1,6 +1,6 @@
 package com.ceiba.pedido.exception;
 
-public class FechaDePedidoInvalidaException extends Exception {
+public class FechaDePedidoInvalidaException extends RuntimeException {
 
 	/**
 	 * 

@@ -10,8 +10,8 @@ import com.ceiba.citapeluqueria.exception.CiudadNoValidaParaCita;
 import com.ceiba.citapeluqueria.exception.FechaInicioCitaInvalidaException;
 import com.ceiba.citapeluqueria.exception.PesoNoAceptadoException;
 import com.ceiba.citapeluqueria.modelo.entidad.CitaPeluqueria;
+import com.ceiba.citapeluqueria.puerto.generadorciudad.GeneradorCiudadValidaCitaPeluqueria;
 import com.ceiba.citapeluqueria.puerto.repositorio.RepositorioCitaPeluqueria;
-import com.ceiba.citapeluqueria.servicio.generadorciudad.GeneradorCiudadValidaCitaPeluqueria;
 import com.ceiba.citapeluqueria.testdatabuilder.CitaPeluqueriaTestDataBuilder;
 import com.ceiba.ciudad.modelo.entidad.Ciudad;
 

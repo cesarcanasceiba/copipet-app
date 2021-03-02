@@ -1,6 +1,6 @@
 package com.ceiba.pedido.exception;
 
-public class PedidoSinElementosException extends Exception {
+public class PedidoSinElementosException extends RuntimeException {
 
 	/**
 	 * 

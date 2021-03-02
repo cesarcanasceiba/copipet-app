@@ -39,4 +39,6 @@ public interface DaoProducto {
 	 * @return Listado de productos
 	 */
 	List<Producto> listaDeProductosPorId(List<Long> listado);
+
+	List<Producto> listaDeProductosPorPedido(Long pedidoId);
 }

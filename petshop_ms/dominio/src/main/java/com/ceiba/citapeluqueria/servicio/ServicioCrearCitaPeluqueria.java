@@ -3,8 +3,8 @@ package com.ceiba.citapeluqueria.servicio;
 import com.ceiba.citapeluqueria.exception.CitasSimultaneasException;
 import com.ceiba.citapeluqueria.exception.CiudadNoValidaParaCita;
 import com.ceiba.citapeluqueria.modelo.entidad.CitaPeluqueria;
+import com.ceiba.citapeluqueria.puerto.generadorciudad.GeneradorCiudadValidaCitaPeluqueria;
 import com.ceiba.citapeluqueria.puerto.repositorio.RepositorioCitaPeluqueria;
-import com.ceiba.citapeluqueria.servicio.generadorciudad.GeneradorCiudadValidaCitaPeluqueria;
 import com.ceiba.ciudad.modelo.entidad.Ciudad;
 
 public class ServicioCrearCitaPeluqueria {

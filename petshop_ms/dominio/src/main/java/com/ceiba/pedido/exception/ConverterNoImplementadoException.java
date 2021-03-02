@@ -1,6 +1,6 @@
 package com.ceiba.pedido.exception;
 
-public class ConverterNoImplementadoException extends Exception{
+public class ConverterNoImplementadoException extends RuntimeException {
 
 	/**
 	 * 
