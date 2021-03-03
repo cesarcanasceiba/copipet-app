@@ -1,0 +1,1 @@
+select id, hora_inicio, hora_final, fotoMascota, pesoMascota, costoCita, peluquero_id, usuario_id from citapeluqueria where id=:id

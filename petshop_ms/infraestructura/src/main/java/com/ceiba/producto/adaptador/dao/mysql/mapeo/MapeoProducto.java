@@ -27,14 +27,15 @@ public class MapeoProducto implements RowMapper<Producto>, MapperResult {
         Long id = rs.getLong("id");
         String nombre = rs.getString("nombre");
         MarcaProducto marca = this.daoMarcaProducto.encontrarPorId(rs.getLong("marca_id"));
-        CategoriaProducto categoriaProducto = this.daoCategoriaProducto.encontrarPorId(rs.getLong("categoria_id"));
+        CategoriaProducto categoriaProducto = this.daoCategoriaProducto
+                .encontrarPorId(rs.getLong("categoria_producto_id"));
         Long precio = rs.getLong("precio");
         String presentacion = rs.getString("presentacion");
         String foto = rs.getString("foto");
         String descripcion = rs.getString("descripcion");
         String caracteristicas = rs.getString("caracteristicas");
         String beneficios = rs.getString("beneficios");
-        String codigoProducto = rs.getString("codigoProducto");
+        String codigoProducto = rs.getString("codigo_producto");
 
         return new Producto(id, nombre, marca, categoriaProducto, precio, presentacion, foto, descripcion,
                 caracteristicas, beneficios, codigoProducto);

@@ -1,0 +1,1 @@
+insert into citapeluqueria (hora_inicio, hora_final, fotoMascota, pesoMascota, costoCita, peluquero_id, usuario_id) values (:hora_inicio, :hora_final, :fotoMascota, :pesoMascota, :costoCita, :peluquero_id, :usuario_id);

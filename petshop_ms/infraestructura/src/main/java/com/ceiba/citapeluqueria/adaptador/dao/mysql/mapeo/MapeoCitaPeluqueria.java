@@ -33,9 +33,8 @@ public class MapeoCitaPeluqueria implements RowMapper<CitaPeluqueria>, MapperRes
     public CitaPeluqueria mapRow(ResultSet rs, int rowNum) throws SQLException {
         Long id = rs.getLong("id");
         Peluquero peluquero = this.daoPeluquero.encontrarPorId(rs.getLong("peluquero_id"));
-        List<ServicioPeluqueria> servicios = this.daoServicioPeluqueria
-                .encontrarServiciosPorCitaPeluqueria(rs.getLong("cita_id"));
-        Date fechaInicio = rs.getDate("fecha_inicio");
+        List<ServicioPeluqueria> servicios = this.daoServicioPeluqueria.encontrarServiciosPorCitaPeluqueria(id);
+        Date fechaInicio = rs.getDate("hora_inicio");
         Usuario usuario = this.daoUsuario.encontrarPorId(rs.getLong("usuario_id"));
         String fotoMascota = rs.getString("fotoMascota");
         Float pesoMascota = rs.getFloat("pesoMascota");

@@ -4,28 +4,29 @@ import lombok.Getter;
 
 @Getter
 public class Ciudad {
-    public Ciudad(Long id, String nombre) {
+	public Ciudad(Long id, String nombre) {
 		this.id = id;
 		this.nombre = nombre;
 	}
+
 	private Long id;
-    private String nombre;
+	private String nombre;
 
-    @Override
-    public int hashCode() {
-      return super.hashCode();
-    }
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
-    @Override
-    public boolean equals(Object other) {
-    	if(other == null) {
-    		return false;
-    	}
-		
+	@Override
+	public boolean equals(Object other) {
+		if (other == null) {
+			return false;
+		}
+
 		if (this.getClass() != other.getClass()) {
 			return false;
 		}
-		Ciudad instance = (Ciudad) other;    	
-    	return this.id.equals(instance.getId());
-    }
+		Ciudad instance = (Ciudad) other;
+		return this.id.equals(instance.getId());
+	}
 }

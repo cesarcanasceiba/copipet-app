@@ -5,6 +5,6 @@ import com.ceiba.repositorio.RepositorioComandoInterface;
 
 public interface RepositorioCitaPeluqueria extends RepositorioComandoInterface<CitaPeluqueria> {
 
-	boolean existenCitasSimultaneas();
+	boolean existenCitasSimultaneas(CitaPeluqueria citaPeluqueria);
 
 }

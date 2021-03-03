@@ -23,9 +23,9 @@ class DtoUsuarioTest {
 
 	@Test
 	void getValorCiudad() {
-		String nombre = "nombre 1";
-		DtoUsuario user = new UsuarioDtoTestDataBuilder().setCiudad(nombre).build();
-		assertEquals(nombre, user.getCiudad());
+		Long ciudad = 1L;
+		DtoUsuario user = new UsuarioDtoTestDataBuilder().setCiudad(ciudad).build();
+		assertEquals(ciudad, user.getCiudad());
 	}
 
 	@Test

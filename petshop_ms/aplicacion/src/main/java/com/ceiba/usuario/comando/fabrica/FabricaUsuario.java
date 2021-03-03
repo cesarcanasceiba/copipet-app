@@ -24,7 +24,8 @@ public class FabricaUsuario {
     public Usuario crear(ComandoUsuario comandoUsuario) throws UsuarioNoAceptaTerminosException {
         Ciudad ciudad = this.daoCiudad.encontrarPorId(comandoUsuario.getCiudad());
         TipoMascota tipoMascota = this.daoTipoMascota.encontrarMascotaPorId(comandoUsuario.getTipoMascota());
-        return new Usuario(comandoUsuario.getId(), comandoUsuario.getNombre(), ciudad, tipoMascota, "",
-                comandoUsuario.getDireccion(), comandoUsuario.getDireccion(), comandoUsuario.isAceptaTerminos());
+        return new Usuario(comandoUsuario.getId(), comandoUsuario.getNombre(), ciudad, tipoMascota,
+                comandoUsuario.getPassword(), comandoUsuario.getDireccion(), comandoUsuario.getDireccion(),
+                comandoUsuario.isAceptaTerminos());
     }
 }

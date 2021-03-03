@@ -1,0 +1,1 @@
+insert into factura_citaspeluqueria (factura_id, citapeluqueria_id) values(:factura_id, :citapeluqueria_id)

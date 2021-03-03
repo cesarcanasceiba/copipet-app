@@ -7,11 +7,13 @@ import com.ceiba.citapeluqueria.modelo.entidad.CitaPeluqueria;
 import com.ceiba.citapeluqueria.servicio.ServicioCrearCitaPeluqueria;
 import com.ceiba.ciudad.modelo.entidad.Ciudad;
 import com.ceiba.ciudad.puerto.dao.DaoCiudad;
+import com.ceiba.manejador.ManejadorComandoRespuesta;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class ManejadorCrearCitaPeluqueria {
+public class ManejadorCrearCitaPeluqueria
+        implements ManejadorComandoRespuesta<ComandoCitaPeluqueria, ComandoRespuesta<Long>> {
     private final FabricaCitaPeluqueria fabricaCitaPeluqueria;
     private final ServicioCrearCitaPeluqueria servicioCrearCitaPeluqueria;
     private DaoCiudad daoCiudad;

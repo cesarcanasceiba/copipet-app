@@ -1,0 +1,1 @@
+select id, nombre from serviciopeluqueria where id in (:listadoIds)

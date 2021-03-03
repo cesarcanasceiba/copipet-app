@@ -14,7 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/usuario")
 @Api(tags = { "Controlador comando usuario" })
 public class ComandoControladorUsuario {
 

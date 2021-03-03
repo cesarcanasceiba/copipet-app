@@ -1,0 +1,1 @@
+select u.id, u.nombre, u.direccion, u.password, u.telefono, u.acepta_terminos, u.ciudad_id as ciudad, u.tipo_mascota_id as tipoMascota from usuario as u

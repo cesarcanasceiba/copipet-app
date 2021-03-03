@@ -1,6 +1,8 @@
 package com.ceiba.pedido.comando.fabrica;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.ceiba.citapeluqueria.comando.fabrica.FabricaCitaPeluqueria;
@@ -17,7 +19,6 @@ import com.ceiba.pedido.modelo.entidad.Pedido;
 import com.ceiba.pedido.puerto.dao.DaoBonoDescuento;
 import com.ceiba.producto.modelo.entidad.Producto;
 import com.ceiba.producto.puerto.dao.DaoProducto;
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -38,11 +39,19 @@ public class FabricaPedido {
     public Pedido crear(ComandoPedido comandoPedido) throws PedidoConListasVaciasException, PedidoSinElementosException,
             FechaDePedidoInvalidaException, ConverterNoImplementadoException {
 
+        BonoDescuento bonoDescuento;
         List<Producto> productos = daoProducto.listaDeProductosPorId(comandoPedido.getProductos());
         List<CitaPeluqueria> citasPeluqueria = comandoPedido.getCitasPeluqueria().stream()
                 .map(this.fabricaCitaPeluqueria::crear).collect(Collectors.toList());
-        BonoDescuento bonoDescuento = this.daoBonoDescuento.obtenerBonoPorId(comandoPedido.getBonoDescuento());
+        if (Objects.nonNull(comandoPedido.getBonoDescuento())) {
+            bonoDescuento = this.daoBonoDescuento.obtenerBonoPorId(comandoPedido.getBonoDescuento());
+        } else {
+            Date fechaActual = new Date();
+            bonoDescuento = new BonoDescuento(null, "NA", fechaActual, fechaActual, null);
+        }
+
         TipoMoneda tipoMoneda = TipoMoneda.valueOf(comandoPedido.getTipoMoneda());
+
         return new Pedido(comandoPedido.getId(), productos, citasPeluqueria, bonoDescuento,
                 comandoPedido.getFechaEntrega(), tipoMoneda, conversorMonedaInterface);
     }

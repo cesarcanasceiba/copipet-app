@@ -1,6 +1,5 @@
 package com.ceiba.infraestructura.error;
 
-
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.ceiba.infraestructura.excepcion.ExcepcionTecnica;
@@ -20,7 +19,7 @@ import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 
 @ControllerAdvice
 public class ManejadorError extends ResponseEntityExceptionHandler {
-    
+
     private static final Logger LOGGER_ERROR = LoggerFactory.getLogger(ManejadorError.class);
 
     private static final String OCURRIO_UN_ERROR_FAVOR_CONTACTAR_AL_ADMINISTRADOR = "OcurriÃ³ un error favor contactar al administrador.";
@@ -34,9 +33,8 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
         CODIGOS_ESTADO.put(ExcepcionValorObligatorio.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(ExcepcionDuplicidad.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(ExcepcionTecnica.class.getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR.value());
-        
-        
-        //en caso de tener otra excepcion matricularla aca
+
+        // en caso de tener otra excepcion matricularla aca
     }
 
     @ExceptionHandler(Exception.class)
@@ -58,7 +56,8 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
 
         return resultado;
     }
-    
-    
-    
+
+    public void registrarExcepcionNegocio(Class<? extends Exception> ex, HttpStatus httpStatus) {
+        CODIGOS_ESTADO.put(ex.getSimpleName(), httpStatus.value());
+    }
 }

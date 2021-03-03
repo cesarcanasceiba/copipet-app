@@ -1,0 +1,1 @@
+select  p.id, p.nombre, p.precio, p.presentacion, p.foto, p.descripcion, p.caracteristicas, p.beneficios, p.codigo_producto, p.categoria_producto_id, p.marca_id from producto p inner join factura_productos as fp on (p.id=fp.producto_id) where fp.factura_id=:pedidoId

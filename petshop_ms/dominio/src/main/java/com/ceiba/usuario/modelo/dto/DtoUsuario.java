@@ -16,6 +16,6 @@ public class DtoUsuario {
 	private String telefono;
 	private boolean aceptaTerminos;
 	@NonNull
-	private String ciudad;
-	private long tipoMascota;
+	private Long ciudad;
+	private Long tipoMascota;
 }

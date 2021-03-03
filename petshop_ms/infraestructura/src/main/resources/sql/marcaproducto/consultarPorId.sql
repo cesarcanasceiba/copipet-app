@@ -1,0 +1,1 @@
+select * from marcaproducto where id=:id

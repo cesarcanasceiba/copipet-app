@@ -26,12 +26,12 @@ public class MapeoUsuario implements RowMapper<Usuario>, MapperResult {
     public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
         Long id = rs.getLong("id");
         String nombre = rs.getString("nombre");
-        Ciudad ciudad = this.daoCiudad.encontrarPorId(rs.getLong("ciudadId"));
-        TipoMascota tipoMascota = this.daoTipoMascota.encontrarMascotaPorId(rs.getLong("tipoMascotaId"));
+        Ciudad ciudad = this.daoCiudad.encontrarPorId(rs.getLong("ciudad"));
+        TipoMascota tipoMascota = this.daoTipoMascota.encontrarMascotaPorId(rs.getLong("tipoMascota"));
         String password = rs.getString("password");
         String direccion = rs.getString("direccion");
         String telefono = rs.getString("telefono");
-        Boolean aceptaTerminos = rs.getBoolean("aceptaTerminos");
+        Boolean aceptaTerminos = rs.getBoolean("acepta_terminos");
         return new Usuario(id, nombre, ciudad, tipoMascota, password, direccion, telefono, aceptaTerminos);
     }
 }

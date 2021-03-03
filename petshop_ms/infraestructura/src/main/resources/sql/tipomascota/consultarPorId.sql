@@ -1,0 +1,1 @@
+select id, nombre from tipomascota where id=:id;

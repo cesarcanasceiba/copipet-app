@@ -1,0 +1,1 @@
+RENAME TABLE factura TO pedido;

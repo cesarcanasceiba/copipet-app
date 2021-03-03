@@ -10,10 +10,15 @@ import org.springframework.jdbc.core.RowMapper;
 public class MapeoUsuarioDto implements RowMapper<DtoUsuario>, MapperResult {
 
     @Override
-    public DtoUsuario mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+    public DtoUsuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Long id = rs.getLong("id");
+        String nombre = rs.getString("nombre");
+        String direccion = rs.getString("direccion");
+        String telefono = rs.getString("telefono");
+        Boolean aceptaTerminos = rs.getBoolean("acepta_terminos");
+        Long ciudad = rs.getLong("ciudad");
+        Long tipoMascota = rs.getLong("tipoMascota");
 
-        String nombre = resultSet.getString("nombre");
-        String clave = resultSet.getString("clave");
-        return new DtoUsuario(rowNum, nombre, clave, nombre, false, clave, rowNum);
+        return new DtoUsuario(id, nombre, direccion, telefono, aceptaTerminos, ciudad, tipoMascota);
     }
 }

@@ -1,8 +1,6 @@
 package com.ceiba.producto.adaptador.dao.mysql;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.producto.adaptador.dao.mysql.mapeo.MapeoProducto;
@@ -15,7 +13,6 @@ import com.ceiba.producto.modelo.entidad.Producto;
 import com.ceiba.producto.puerto.dao.DaoCategoriaProducto;
 import com.ceiba.producto.puerto.dao.DaoMarcaProducto;
 import com.ceiba.producto.puerto.dao.DaoProducto;
-
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
@@ -72,10 +69,8 @@ public class DaoProductoMysql implements DaoProducto {
 
     @Override
     public List<Producto> listaDeProductosPorId(List<Long> listado) {
-        String listadoIdParaConsulta = String.join(",",
-                listado.stream().map(id -> id.toString()).collect(Collectors.toList()));
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("listado", listadoIdParaConsulta);
+        params.addValue("listadoIds", listado);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlConsultarProductosPorId,
                 params, new MapeoProducto(this.daoMarcaProducto, this.daoCategoriaProducto));
     }

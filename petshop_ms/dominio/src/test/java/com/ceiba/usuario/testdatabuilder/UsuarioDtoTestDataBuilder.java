@@ -10,8 +10,8 @@ public class UsuarioDtoTestDataBuilder implements TestDataBuilderInterface<DtoUs
 	private String direccion;
 	private String telefono;
 	private boolean aceptaTerminos;
-	private String ciudad;
-	private long tipoMascota;
+	private Long ciudad;
+	private Long tipoMascota;
 
 	public UsuarioDtoTestDataBuilder() {
 		this.id = 1L;
@@ -19,7 +19,7 @@ public class UsuarioDtoTestDataBuilder implements TestDataBuilderInterface<DtoUs
 		this.direccion = "Dir base";
 		this.telefono = "132312";
 		this.aceptaTerminos = true;
-		this.ciudad = "Bogota";
+		this.ciudad = 1L;
 		this.tipoMascota = 1L;
 	}
 
@@ -28,7 +28,7 @@ public class UsuarioDtoTestDataBuilder implements TestDataBuilderInterface<DtoUs
 		return this;
 	}
 
-	public UsuarioDtoTestDataBuilder setCiudad(String ciudad) {
+	public UsuarioDtoTestDataBuilder setCiudad(Long ciudad) {
 		this.ciudad = ciudad;
 		return this;
 	}

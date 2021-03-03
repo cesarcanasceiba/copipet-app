@@ -1,0 +1,1 @@
+select c.id, c.hora_inicio, c.hora_final, c.fotoMascota, c.pesoMascota, c.costoCita, c.peluquero_id, c.usuario_id from citapeluqueria c inner join factura_citaspeluqueria as cp on (c.id=cp.citapeluqueria_id) where cp.factura_id=:pedidoId

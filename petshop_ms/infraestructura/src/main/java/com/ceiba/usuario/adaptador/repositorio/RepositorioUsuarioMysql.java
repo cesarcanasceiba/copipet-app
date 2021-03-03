@@ -19,17 +19,8 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
     @SqlStatement(namespace = "usuario", value = "crear")
     private static String sqlCrear;
 
-    @SqlStatement(namespace = "usuario", value = "actualizar")
-    private static String sqlActualizar;
-
-    @SqlStatement(namespace = "usuario", value = "eliminar")
-    private static String sqlEliminar;
-
     @SqlStatement(namespace = "usuario", value = "existe")
     private static String sqlExiste;
-
-    @SqlStatement(namespace = "usuario", value = "existeExcluyendoId")
-    private static String sqlExisteExcluyendoId;
 
     public RepositorioUsuarioMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate,
             DaoUsuario daoUsuario) {
@@ -39,7 +30,10 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
 
     @Override
     public DtoUsuario crear(Usuario usuario) {
-        Long newUserId = this.customNamedParameterJdbcTemplate.crear(usuario, sqlCrear);
+        MapeoUsuarioMysql nuevoUsuario = new MapeoUsuarioMysql(usuario.getId(), usuario.getNombre(),
+                usuario.getPassword(), usuario.getDireccion(), usuario.getTelefono(), usuario.getAceptaTerminos(),
+                usuario.getCiudad().getId(), usuario.getTipoMascota().getId());
+        Long newUserId = this.customNamedParameterJdbcTemplate.crear(nuevoUsuario, sqlCrear);
         return daoUsuario.recuperarUsuarioDto(newUserId);
     }
 
@@ -51,5 +45,4 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,
                 paramSource, Boolean.class);
     }
-
 }

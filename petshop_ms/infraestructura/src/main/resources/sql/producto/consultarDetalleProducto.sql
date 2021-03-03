@@ -1,0 +1,1 @@
+select p.id, p.nombre, m.nombre as marca, p.precio, p.presentacion, p.foto, p.descripcion, p.caracteristicas, p.beneficios, p.codigo_producto, c.nombre as categoria_producto from producto as p inner join marcaproducto as m on(p.marca_id=m.id) inner join categoriaproducto as c on(p.categoria_producto_id=c.id) where p.id=:id;

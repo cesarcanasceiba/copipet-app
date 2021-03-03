@@ -1,4 +1,4 @@
-CREATE TABLE `cuidad`
+CREATE TABLE `ciudad`
 (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar
@@ -79,12 +79,12 @@ CREATE TABLE `usuario`
   `tipo_mascota_id` int NOT NULL,
   PRIMARY KEY
 (`id`),
-  KEY `usuario_ciudad_id_8f87d332_fk_cuidad_id`
+  KEY `usuario_ciudad_id_8f87d332_fk_ciudad_id`
 (`ciudad_id`),
   KEY `usuario_tipo_mascota_id_641a478f_fk_tipomascota_id`
 (`tipo_mascota_id`),
-  CONSTRAINT `usuario_ciudad_id_8f87d332_fk_cuidad_id` FOREIGN KEY
-(`ciudad_id`) REFERENCES `cuidad`
+  CONSTRAINT `usuario_ciudad_id_8f87d332_fk_ciudad_id` FOREIGN KEY
+(`ciudad_id`) REFERENCES `ciudad`
 (`id`),
   CONSTRAINT `usuario_tipo_mascota_id_641a478f_fk_tipomascota_id` FOREIGN KEY
 (`tipo_mascota_id`) REFERENCES `tipomascota`

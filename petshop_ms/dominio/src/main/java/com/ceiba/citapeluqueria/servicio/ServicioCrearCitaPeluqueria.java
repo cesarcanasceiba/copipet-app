@@ -21,12 +21,12 @@ public class ServicioCrearCitaPeluqueria {
 	public CitaPeluqueria ejecutar(CitaPeluqueria cita, Ciudad ciudad)
 			throws CiudadNoValidaParaCita, CitasSimultaneasException {
 		this.validarCiudad(ciudad);
-		this.validarSimultaneidadCita();
+		this.validarSimultaneidadCita(cita);
 		return this.repositorio.crear(cita);
 	}
 
-	private void validarSimultaneidadCita() throws CitasSimultaneasException {
-		if (this.repositorio.existenCitasSimultaneas()) {
+	private void validarSimultaneidadCita(CitaPeluqueria cita) throws CitasSimultaneasException {
+		if (this.repositorio.existenCitasSimultaneas(cita)) {
 			throw new CitasSimultaneasException();
 		}
 	}

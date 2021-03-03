@@ -27,16 +27,20 @@ public class MapeoPedido implements RowMapper<Pedido>, MapperResult {
 
     public MapeoPedido(DaoProducto daoProducto, DaoCitaPeluqueria daoCitaPeluqueria, DaoBonoDescuento daoBonoDescuento,
             ConversorMonedaInterface conversorMoneda) {
+        this.daoProducto = daoProducto;
+        this.daoCitaPeluqueria = daoCitaPeluqueria;
+        this.daoBonoDescuento = daoBonoDescuento;
+        this.conversorMoneda = conversorMoneda;
     }
 
     @Override
     public Pedido mapRow(ResultSet rs, int rowNum) throws SQLException {
         Long id = rs.getLong("id");
-        List<Producto> productos = daoProducto.listaDeProductosPorPedido(rs.getLong("pedidoId"));
-        List<CitaPeluqueria> citasPeluqueria = daoCitaPeluqueria.consultarPorPedido(rs.getLong("pedidoId"));
-        BonoDescuento bonoDescuento = daoBonoDescuento.obtenerBonoPorId(rs.getLong("bonoDescuento"));
+        List<Producto> productos = daoProducto.listaDeProductosPorPedido(id);
+        List<CitaPeluqueria> citasPeluqueria = daoCitaPeluqueria.consultarPorPedido(id);
+        BonoDescuento bonoDescuento = daoBonoDescuento.obtenerBonoPorId(rs.getLong("bonoDescuento_id"));
         Date fechaEntrega = rs.getDate("fechaEntrega");
-        TipoMoneda tipoMoneda = TipoMoneda.valueOf(rs.getString("tipoMoneda"));
+        TipoMoneda tipoMoneda = TipoMoneda.COP;
         ConversorMonedaInterface conversorMoneda = this.conversorMoneda;
         return new Pedido(id, productos, citasPeluqueria, bonoDescuento, fechaEntrega, tipoMoneda, conversorMoneda);
     }

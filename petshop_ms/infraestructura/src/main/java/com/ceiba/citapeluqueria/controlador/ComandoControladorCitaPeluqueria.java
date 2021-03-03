@@ -18,12 +18,8 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags = { "Controlador comando cita peluqueria" })
 public class ComandoControladorCitaPeluqueria {
 
-    private ManejadorCrearCitaPeluqueria manejadorCrearCitaPeluqueria;
-
     @Autowired
-    public ComandoControladorCitaPeluqueria(ManejadorCrearCitaPeluqueria manejadorCrearCitaPeluqueria) {
-        this.manejadorCrearCitaPeluqueria = manejadorCrearCitaPeluqueria;
-    }
+    private ManejadorCrearCitaPeluqueria manejadorCrearCitaPeluqueria;
 
     @PostMapping
     @ApiOperation("Crear cita peluqueria")

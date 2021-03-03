@@ -1,0 +1,1 @@
+select id, nombre from bonodesucento where id=:id

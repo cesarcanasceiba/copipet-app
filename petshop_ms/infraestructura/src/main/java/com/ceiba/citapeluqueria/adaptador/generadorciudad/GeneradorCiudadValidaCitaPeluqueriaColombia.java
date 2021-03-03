@@ -13,7 +13,7 @@ public class GeneradorCiudadValidaCitaPeluqueriaColombia implements GeneradorCiu
 
     @Override
     public Ciudad get() {
-        return this.daoCiudad.encontrarPorId(1L);
+        return this.daoCiudad.encontrarPorId(10L);
     }
 
     public GeneradorCiudadValidaCitaPeluqueriaColombia(DaoCiudad daoCiudad) {

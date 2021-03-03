@@ -28,7 +28,7 @@ public class FabricaCitaPeluqueria {
     }
 
     public CitaPeluqueria crear(ComandoCitaPeluqueria comandoCita) {
-        Peluquero peluquero = this.daoPeluquero.encontrarPorId(comandoCita.getId());
+        Peluquero peluquero = this.daoPeluquero.encontrarPorId(comandoCita.getPeluquero());
         List<ServicioPeluqueria> servicios = this.daoServicioPeluqueria
                 .encontrarServiciosPorId(comandoCita.getServicios());
         Usuario usuario = this.daoUsuario.encontrarPorId(comandoCita.getUsuario());

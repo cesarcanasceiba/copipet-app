@@ -1,5 +1,6 @@
 package com.ceiba.pedido.comando.manejador;
 
+import com.ceiba.manejador.ManejadorComandoRespuesta;
 import com.ceiba.pedido.comando.ComandoPedido;
 import com.ceiba.pedido.comando.fabrica.FabricaPedido;
 import com.ceiba.pedido.exception.ConverterNoImplementadoException;
@@ -12,7 +13,7 @@ import com.ceiba.pedido.servicio.ServicioCrearPedido;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ManejadorCrearPedido {
+public class ManejadorCrearPedido implements ManejadorComandoRespuesta<ComandoPedido, Pedido> {
     private FabricaPedido fabricaPedido;
     private ServicioCrearPedido servicioCrearPedido;
 

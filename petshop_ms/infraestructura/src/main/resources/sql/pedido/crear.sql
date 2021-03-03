@@ -1,0 +1,1 @@
+insert into pedido (costoTotal, bonoDescuento_id, fechaEntrega) values (:costoTotal,:bonoDescuento_id, :fechaEntrega)

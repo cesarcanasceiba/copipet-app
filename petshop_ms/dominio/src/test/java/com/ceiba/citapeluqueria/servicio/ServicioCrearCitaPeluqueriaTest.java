@@ -18,10 +18,12 @@ import com.ceiba.ciudad.modelo.entidad.Ciudad;
 public class ServicioCrearCitaPeluqueriaTest {
 
 	private static Long BOGOTA_ID = 1L;
+
 	@Test
-	public void excepcionGuardarEnCiudadDiferenteABogota() throws PesoNoAceptadoException, FechaInicioCitaInvalidaException {
+	public void excepcionGuardarEnCiudadDiferenteABogota()
+			throws PesoNoAceptadoException, FechaInicioCitaInvalidaException {
 		Ciudad bogota = new Ciudad(BOGOTA_ID, "Bogota");
-		GeneradorCiudadValidaCitaPeluqueria generadorBogota = ()-> bogota;
+		GeneradorCiudadValidaCitaPeluqueria generadorBogota = () -> bogota;
 
 		CitaPeluqueria cita = new CitaPeluqueriaTestDataBuilder().build();
 		RepositorioCitaPeluqueria repositorio = Mockito.mock(RepositorioCitaPeluqueria.class);
@@ -31,34 +33,34 @@ public class ServicioCrearCitaPeluqueriaTest {
 
 		Ciudad ciudadInvalida = Mockito.mock(Ciudad.class);
 		Mockito.when(ciudadInvalida.getId()).thenReturn(2L);
-		assertThrows(CiudadNoValidaParaCita.class, ()->servicio.ejecutar(cita, ciudadInvalida),"");
+		assertThrows(CiudadNoValidaParaCita.class, () -> servicio.ejecutar(cita, ciudadInvalida), "");
 	}
 
 	@Test
 	public void validarExistenCitasSimultaneas() throws PesoNoAceptadoException, FechaInicioCitaInvalidaException {
 		Ciudad bogota = new Ciudad(BOGOTA_ID, "Bogota");
-		GeneradorCiudadValidaCitaPeluqueria generadorBogota = ()-> bogota;
+		GeneradorCiudadValidaCitaPeluqueria generadorBogota = () -> bogota;
 
 		CitaPeluqueria cita = new CitaPeluqueriaTestDataBuilder().build();
 		RepositorioCitaPeluqueria repositorio = Mockito.mock(RepositorioCitaPeluqueria.class);
 		Mockito.when(repositorio.crear(cita)).thenReturn(cita);
-		Mockito.when(repositorio.existenCitasSimultaneas()).thenReturn(true);
+		Mockito.when(repositorio.existenCitasSimultaneas(cita)).thenReturn(true);
 
 		ServicioCrearCitaPeluqueria servicio = new ServicioCrearCitaPeluqueria(repositorio, generadorBogota);
-		assertThrows(CitasSimultaneasException.class, ()->servicio.ejecutar(cita, bogota),"");
+		assertThrows(CitasSimultaneasException.class, () -> servicio.ejecutar(cita, bogota), "");
 	}
-	
+
 	@Test
 	public void validarNoExistenCitasSimultaneas() throws PesoNoAceptadoException, FechaInicioCitaInvalidaException {
 		Ciudad bogota = new Ciudad(BOGOTA_ID, "Bogota");
-		GeneradorCiudadValidaCitaPeluqueria generadorBogota = ()-> bogota;
+		GeneradorCiudadValidaCitaPeluqueria generadorBogota = () -> bogota;
 
 		CitaPeluqueria cita = new CitaPeluqueriaTestDataBuilder().build();
 		RepositorioCitaPeluqueria repositorio = Mockito.mock(RepositorioCitaPeluqueria.class);
 		Mockito.when(repositorio.crear(cita)).thenReturn(cita);
-		Mockito.when(repositorio.existenCitasSimultaneas()).thenReturn(false);
+		Mockito.when(repositorio.existenCitasSimultaneas(cita)).thenReturn(false);
 
 		ServicioCrearCitaPeluqueria servicio = new ServicioCrearCitaPeluqueria(repositorio, generadorBogota);
-		assertDoesNotThrow(()->servicio.ejecutar(cita, bogota),"Se genera la cita");
+		assertDoesNotThrow(() -> servicio.ejecutar(cita, bogota), "Se genera la cita");
 	}
 }

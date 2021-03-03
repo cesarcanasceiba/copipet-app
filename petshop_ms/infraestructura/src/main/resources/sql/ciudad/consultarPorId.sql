@@ -1,0 +1,1 @@
+select id, nombre from ciudad where id=:id;

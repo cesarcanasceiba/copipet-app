@@ -14,13 +14,13 @@ public class MapeoProductoDetalleDto implements RowMapper<ProductoDetalleDTO>, M
         String nombre = rs.getString("nombre");
         String marca = rs.getString("marca");
         Long precio = rs.getLong("precio");
-        String presentacion = rs.getString("presnetacion");
+        String presentacion = rs.getString("presentacion");
         String foto = rs.getString("foto");
         String descripcion = rs.getString("descripcion");
         String caracteristicas = rs.getString("caracteristicas");
         String beneficios = rs.getString("beneficios");
-        String codigoProducto = rs.getString("codigoProducto");
-        String categoriaProducto = rs.getString("categoriaProducto");
+        String codigoProducto = rs.getString("codigo_producto");
+        String categoriaProducto = rs.getString("categoria_producto");
         return new ProductoDetalleDTO(id, nombre, marca, precio, presentacion, foto, descripcion, caracteristicas,
                 beneficios, codigoProducto, categoriaProducto);
     }
