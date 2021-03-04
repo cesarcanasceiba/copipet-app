@@ -11,11 +11,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class ConversorMonedaCurrencyLayer implements ConversorMonedaInterface {
 
     @Override
-    public Long fromUsDToCop(Long usD) {
+    public Long fromCopToUsD(Long cop) {
         WebClient client = WebClient.builder().baseUrl(
                 "http://api.currencylayer.com/live?access_key=24de132f44eb874e3b3afa59b9e02c54&format=1&source=USD&currencies=COP")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
-        return client.get().retrieve().bodyToMono(CurrencyLayerConverterResponse.class).block().getQuotes()
-                .get("USDCOP");
+        Long factorConversion = client.get().retrieve().bodyToMono(CurrencyLayerConverterResponse.class).block()
+                .getQuotes().get("USDCOP");
+        return cop / factorConversion;
     }
 }

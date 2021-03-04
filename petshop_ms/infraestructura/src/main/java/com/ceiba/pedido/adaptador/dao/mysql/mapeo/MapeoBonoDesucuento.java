@@ -14,7 +14,7 @@ public class MapeoBonoDesucuento implements RowMapper<BonoDescuento>, MapperResu
         Long id = rs.getLong("id");
         String codigo = rs.getString("codigo");
         Date inicioVigencia = rs.getDate("inicioVigencia");
-        Date finVigencia = rs.getDate("finVigenvia");
+        Date finVigencia = rs.getDate("finVigencia");
         Float descuento = rs.getFloat("descuento");
         return new BonoDescuento(id, codigo, inicioVigencia, finVigencia, descuento);
     }

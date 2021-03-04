@@ -27,7 +27,7 @@ public class MapeoUsuario implements RowMapper<Usuario>, MapperResult {
         Long id = rs.getLong("id");
         String nombre = rs.getString("nombre");
         Ciudad ciudad = this.daoCiudad.encontrarPorId(rs.getLong("ciudad_id"));
-        TipoMascota tipoMascota = this.daoTipoMascota.encontrarMascotaPorId(rs.getLong("tipom_mascota_id"));
+        TipoMascota tipoMascota = this.daoTipoMascota.encontrarMascotaPorId(rs.getLong("tipo_mascota_id"));
         String password = rs.getString("password");
         String direccion = rs.getString("direccion");
         String telefono = rs.getString("telefono");

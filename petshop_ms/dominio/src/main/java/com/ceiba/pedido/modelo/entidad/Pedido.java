@@ -133,7 +133,7 @@ public class Pedido {
 			if (currencyConverter == null) {
 				throw new ConverterNoImplementadoException();
 			} else {
-				costo = currencyConverter.fromUsDToCop(costo);
+				costo = currencyConverter.fromCopToUsD(costo);
 			}
 		}
 		return costo;

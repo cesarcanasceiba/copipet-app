@@ -1,1 +1,10 @@
-select id, nombre from bonodesucento where id=:id
+select
+    id,
+    codigo,
+    inicioVigencia,
+    finVigencia,
+    descuento
+from
+    bonodescuento
+where
+    id = :id
