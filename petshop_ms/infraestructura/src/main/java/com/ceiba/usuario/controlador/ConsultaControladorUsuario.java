@@ -11,22 +11,19 @@ import com.ceiba.usuario.modelo.dto.DtoUsuario;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/usuarios")
-@Api(tags={"Controlador consulta usuario"})
+@Api(tags = { "Controlador consulta usuario" })
+@RequiredArgsConstructor
 public class ConsultaControladorUsuario {
 
     private final ManejadorListarUsuarios manejadorListarUsuarios;
-
-    public ConsultaControladorUsuario(ManejadorListarUsuarios manejadorListarUsuarios) {
-        this.manejadorListarUsuarios = manejadorListarUsuarios;
-    }
 
     @GetMapping
     @ApiOperation("Listar Usuarios")
     public List<DtoUsuario> listar() {
         return this.manejadorListarUsuarios.ejecutar();
     }
-
 }

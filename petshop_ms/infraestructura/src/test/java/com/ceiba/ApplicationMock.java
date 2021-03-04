@@ -1,9 +1,7 @@
 package com.ceiba;
 
 import java.io.IOException;
-
 import javax.sql.DataSource;
-
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,8 +19,8 @@ public class ApplicationMock {
 
     @Bean(initMethod = "migrate")
     Flyway flyway(DataSource dataSource) throws IOException {
-        return Flyway.configure().locations("filesystem:../src/main/resources","filesystem:src/test/resources").baselineOnMigrate(true)
-                .dataSource(dataSource).load();
+        return Flyway.configure().locations("filesystem:../src/main/resources", "filesystem:src/test/resources")
+                .baselineOnMigrate(true).dataSource(dataSource).load();
     }
 
     @Bean

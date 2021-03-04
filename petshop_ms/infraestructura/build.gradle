@@ -17,6 +17,8 @@ dependencies {
 	implementation project.ext.springbootweb
 	implementation project.ext.springbootwebclient
 	implementation project.ext.swagger
+	compileOnly project.ext.lombok
+	annotationProcessor project.ext.lombok
 
 	implementation project.ext.apachecommons
 	implementation project.ext.springbootjdbc

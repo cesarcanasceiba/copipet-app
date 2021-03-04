@@ -22,9 +22,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes= ApplicationMock.class)
+@ContextConfiguration(classes = ApplicationMock.class)
 @WebMvcTest(ComandoControladorUsuario.class)
-@Ignore
 public class ComandoControladorUsuarioTest {
 
     @Autowired
@@ -34,29 +33,25 @@ public class ComandoControladorUsuarioTest {
     private MockMvc mocMvc;
 
     @Test
-    public void crear() throws Exception{
+    public void crear() throws Exception {
         // arrange
         ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
 
         // act - assert
-        mocMvc.perform(post("/usuarios")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(usuario)))
-                .andExpect(status().isOk())
+        mocMvc.perform(post("/usuarios").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(usuario))).andExpect(status().isOk())
                 .andExpect(content().json("{'valor': 2}"));
     }
 
     @Test
-    public void actualizar() throws Exception{
+    public void actualizar() throws Exception {
         // arrange
         Long id = 2L;
         ComandoUsuario usuario = new ComandoUsuarioTestDataBuilder().build();
 
         // act - assert
-        mocMvc.perform(put("/usuarios/{id}",id)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(usuario)))
-                .andExpect(status().isOk());
+        mocMvc.perform(put("/usuarios/{id}", id).contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(usuario))).andExpect(status().isOk());
     }
 
     @Test
@@ -65,9 +60,8 @@ public class ComandoControladorUsuarioTest {
         Long id = 2L;
 
         // act - assert
-        mocMvc.perform(delete("/usuarios/{id}",id)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
+        mocMvc.perform(
+                delete("/usuarios/{id}", id).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 }
