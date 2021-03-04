@@ -31,7 +31,6 @@ public class ConsultaControladorUsuarioTest {
 
         // act - assert
         mocMvc.perform(get("/usuario").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].nombreUsuario", is("nombre prueba consulta")));
     }
 
