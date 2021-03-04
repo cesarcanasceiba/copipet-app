@@ -1,1 +1,2 @@
-RENAME TABLE factura TO pedido;
+ALTER TABLE
+    factura RENAME TO pedido;
