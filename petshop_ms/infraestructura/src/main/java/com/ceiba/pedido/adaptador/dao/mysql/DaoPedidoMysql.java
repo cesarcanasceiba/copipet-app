@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class DaoPedidoMysql implements DaoPedido {
 
     @SqlStatement(namespace = "pedido", value = "consultarPorId")
-    String consultarPorId;
+    private static String consultarPorId;
 
     private CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
     private DaoBonoDescuento daoBonoDescuento;

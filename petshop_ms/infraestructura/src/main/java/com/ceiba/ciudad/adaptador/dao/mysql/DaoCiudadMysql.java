@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class DaoCiudadMysql implements DaoCiudad {
 
     @SqlStatement(namespace = "ciudad", value = "consultarPorId")
-    String consultarPorId;
+    private static String consultarPorId;
     private CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     public DaoCiudadMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {

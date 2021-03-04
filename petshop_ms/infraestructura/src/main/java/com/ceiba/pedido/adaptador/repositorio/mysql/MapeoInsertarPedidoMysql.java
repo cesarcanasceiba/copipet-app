@@ -10,7 +10,7 @@ public class MapeoInsertarPedidoMysql {
     public MapeoInsertarPedidoMysql(Long costoTotal, Long bonoDescuento_id, Date fechaEntrega) {
         this.costoTotal = costoTotal;
         this.bonoDescuento_id = bonoDescuento_id;
-        this.fechaEntrega = fechaEntrega;
+        this.fechaEntrega = new Date(fechaEntrega.getTime());
     }
 
     public Long getCostoTotal() {
@@ -22,6 +22,6 @@ public class MapeoInsertarPedidoMysql {
     }
 
     public Date getFechaEntrega() {
-        return fechaEntrega;
+        return new Date(fechaEntrega.getTime());
     }
 }

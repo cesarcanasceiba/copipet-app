@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class DaoServicioPeluqueriaMysql implements DaoServicioPeluqueria {
     @SqlStatement(namespace = "serviciopeluqueria", value = "consultarListadoPorId")
-    String consultarListadoPorId;
+    private static String consultarListadoPorId;
 
     @SqlStatement(namespace = "serviciopeluqueria", value = "consultarListadoPorCita")
-    String consultarListadoPorCita;
+    private static String consultarListadoPorCita;
 
     private CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 

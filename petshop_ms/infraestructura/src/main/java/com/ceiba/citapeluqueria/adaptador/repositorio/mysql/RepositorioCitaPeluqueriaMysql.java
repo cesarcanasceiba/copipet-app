@@ -16,13 +16,13 @@ import org.springframework.stereotype.Repository;
 public class RepositorioCitaPeluqueriaMysql implements RepositorioCitaPeluqueria {
 
         @SqlStatement(namespace = "citapeluqueria", value = "crear")
-        String sqlCrearCita;
+        private static String sqlCrearCita;
 
         @SqlStatement(namespace = "citapeluqueria", value = "existenCitasSimultaneas")
-        String sqlExistenCitasSimultaneas;
+        private static String sqlExistenCitasSimultaneas;
 
         @SqlStatement(namespace = "citapeluqueria", value = "asociarServiciosACitas")
-        String sqlAsociarServiciosACitas;
+        private static String sqlAsociarServiciosACitas;
 
         private CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
         private DaoCitaPeluqueria daoCitaPeluqueria;
