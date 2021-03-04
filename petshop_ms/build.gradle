@@ -8,8 +8,8 @@ allprojects {
 			"org.apache.commons:commons-lang3:3.7"
 	]
 	
-	tasks.withType(JavaCompile) { options.encoding = "iso-8859-1" }
-	tasks.withType(Test) { systemProperty "file.encoding", "iso-8859-1" }
+	tasks.withType(JavaCompile) { options.encoding = "utf-8" }
+	tasks.withType(Test) { systemProperty "file.encoding", "utf-8" }
 
 	project.ext.junit5 = ["org.junit.jupiter:junit-jupiter-api:5.7.1", "org.junit.jupiter:junit-jupiter-params:5.7.1"]
 	project.ext.junit5Runtime = ["org.junit.jupiter:junit-jupiter-engine:5.7.1", "org.junit.jupiter:junit-jupiter-params:5.7.1"]
