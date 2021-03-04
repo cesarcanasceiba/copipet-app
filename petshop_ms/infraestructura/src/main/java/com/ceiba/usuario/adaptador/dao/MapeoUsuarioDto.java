@@ -16,8 +16,8 @@ public class MapeoUsuarioDto implements RowMapper<DtoUsuario>, MapperResult {
         String direccion = rs.getString("direccion");
         String telefono = rs.getString("telefono");
         Boolean aceptaTerminos = rs.getBoolean("acepta_terminos");
-        Long ciudad = rs.getLong("ciudad");
-        Long tipoMascota = rs.getLong("tipoMascota");
+        Long ciudad = rs.getLong("ciudad_id");
+        Long tipoMascota = rs.getLong("tipo_mascota_id");
 
         return new DtoUsuario(id, nombre, direccion, telefono, aceptaTerminos, ciudad, tipoMascota);
     }

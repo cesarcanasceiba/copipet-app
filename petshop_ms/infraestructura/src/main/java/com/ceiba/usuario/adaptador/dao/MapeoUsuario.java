@@ -26,8 +26,8 @@ public class MapeoUsuario implements RowMapper<Usuario>, MapperResult {
     public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
         Long id = rs.getLong("id");
         String nombre = rs.getString("nombre");
-        Ciudad ciudad = this.daoCiudad.encontrarPorId(rs.getLong("ciudad"));
-        TipoMascota tipoMascota = this.daoTipoMascota.encontrarMascotaPorId(rs.getLong("tipoMascota"));
+        Ciudad ciudad = this.daoCiudad.encontrarPorId(rs.getLong("ciudad_id"));
+        TipoMascota tipoMascota = this.daoTipoMascota.encontrarMascotaPorId(rs.getLong("tipom_mascota_id"));
         String password = rs.getString("password");
         String direccion = rs.getString("direccion");
         String telefono = rs.getString("telefono");

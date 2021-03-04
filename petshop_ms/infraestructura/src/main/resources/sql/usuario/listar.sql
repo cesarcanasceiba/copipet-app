@@ -1,2 +1,11 @@
-select id,nombre,clave,fecha_creacion
-from usuario
+select
+    id,
+    nombre,
+    password,
+    direccion,
+    telefono,
+    acepta_terminos,
+    ciudad_id,
+    tipo_mascota_id
+from
+    usuario

@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/usuario")
 @Api(tags = { "Controlador consulta usuario" })
 @RequiredArgsConstructor
 public class ConsultaControladorUsuario {
