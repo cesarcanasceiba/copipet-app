@@ -9,4 +9,12 @@ public class MapeoInsertarAsociacionProductoPedidoMysql {
         this.producto_id = producto_id;
     }
 
+	public Long getFactura_id() {
+		return factura_id;
+	}
+
+	public Long getProducto_id() {
+		return producto_id;
+	}
+
 }

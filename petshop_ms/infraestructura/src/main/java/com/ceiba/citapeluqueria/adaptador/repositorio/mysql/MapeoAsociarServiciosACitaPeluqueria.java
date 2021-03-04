@@ -8,4 +8,12 @@ public class MapeoAsociarServiciosACitaPeluqueria {
         this.citapeluqueria_id = citapeluqueria_id;
         this.serviciopeluqueria_id = serviciopeluqueria_id;
     }
+
+	public Long getCitapeluqueriaId() {
+		return citapeluqueria_id;
+	}
+
+	public Long getServiciopeluqueriaId() {
+		return serviciopeluqueria_id;
+	}
 }

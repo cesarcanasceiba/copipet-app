@@ -12,4 +12,16 @@ public class MapeoInsertarPedidoMysql {
         this.bonoDescuento_id = bonoDescuento_id;
         this.fechaEntrega = fechaEntrega;
     }
+
+    public Long getCostoTotal() {
+        return costoTotal;
+    }
+
+    public Long getBonoDescuento_id() {
+        return bonoDescuento_id;
+    }
+
+    public Date getFechaEntrega() {
+        return fechaEntrega;
+    }
 }

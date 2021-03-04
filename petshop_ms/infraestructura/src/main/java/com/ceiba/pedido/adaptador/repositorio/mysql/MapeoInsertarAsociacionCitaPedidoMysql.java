@@ -8,4 +8,12 @@ public class MapeoInsertarAsociacionCitaPedidoMysql {
         this.factura_id = factura_id;
         this.citapeluqueria_id = citapeluqueria_id;
     }
+
+	public Long getFacturaId() {
+		return factura_id;
+	}
+
+	public Long getCitapeluqueriaId() {
+		return citapeluqueria_id;
+	}
 }

@@ -22,4 +22,31 @@ public class MapeoCitaPeluqueriaMysql {
         this.usuario_id = usuario_id;
     }
 
+	public Date getHoraInicio() {
+		return hora_inicio;
+	}
+
+	public Date getHoraFinal() {
+		return hora_final;
+	}
+
+	public String getFotoMascota() {
+		return fotoMascota;
+	}
+
+	public Float getPesoMascota() {
+		return pesoMascota;
+	}
+
+	public Long getCostoCita() {
+		return costoCita;
+	}
+
+	public Long getPeluqueroId() {
+		return peluquero_id;
+	}
+
+	public Long getUsuarioId() {
+		return usuario_id;
+	}
 }
