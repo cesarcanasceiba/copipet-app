@@ -44,6 +44,14 @@ public class ComandoControladorPedidoTest {
 		ComandoPedido comandoPedido = new ComandoPedidoTestDataBuilder().setId(null).setTipoMoneda("USD").build();
 		mocMvc.perform(post("/pedido").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(comandoPedido))).andExpect(status().isOk())
-				.andExpect(jsonPath("$.costoTotal", is(219340)));
+				.andExpect(jsonPath("$.costoTotal", is(60)));
+	}
+
+	@Test
+	public void testCrearSinCitasAsociadas() throws JsonProcessingException, Exception {
+		ComandoPedido comandoPedido = new ComandoPedidoTestDataBuilder().setId(null).setCitasPeluqueria(null).build();
+		mocMvc.perform(post("/pedido").contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(comandoPedido))).andExpect(status().isOk())
+				.andExpect(jsonPath("$.costoTotal", is(129340)));
 	}
 }

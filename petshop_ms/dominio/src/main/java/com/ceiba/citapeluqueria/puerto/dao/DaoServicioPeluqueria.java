@@ -7,4 +7,6 @@ public interface DaoServicioPeluqueria {
     List<ServicioPeluqueria> encontrarServiciosPorId(List<Long> listaServicios);
 
     List<ServicioPeluqueria> encontrarServiciosPorCitaPeluqueria(Long citaId);
+
+    List<ServicioPeluqueria> lista();
 }

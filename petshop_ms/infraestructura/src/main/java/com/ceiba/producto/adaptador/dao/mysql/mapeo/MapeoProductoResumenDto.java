@@ -20,5 +20,4 @@ public class MapeoProductoResumenDto implements RowMapper<ProductoResumenDTO>, M
         String foto = rs.getString("foto");
         return new ProductoResumenDTO(id, nombre, marca, precio, presentacion, foto);
     }
-
 }

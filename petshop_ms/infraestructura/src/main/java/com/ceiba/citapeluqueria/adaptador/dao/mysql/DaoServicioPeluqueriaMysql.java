@@ -18,6 +18,9 @@ public class DaoServicioPeluqueriaMysql implements DaoServicioPeluqueria {
     @SqlStatement(namespace = "serviciopeluqueria", value = "consultarListadoPorCita")
     private static String consultarListadoPorCita;
 
+    @SqlStatement(namespace = "serviciopeluqueria", value = "lista")
+    private static String sqlLista;
+
     private CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     public DaoServicioPeluqueriaMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
@@ -38,5 +41,11 @@ public class DaoServicioPeluqueriaMysql implements DaoServicioPeluqueria {
         params.addValue("citaId", citaId);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(consultarListadoPorCita,
                 params, new MapeoServicioPeluqueria());
+    }
+
+    @Override
+    public List<ServicioPeluqueria> lista() {
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlLista,
+                new MapeoServicioPeluqueria());
     }
 }

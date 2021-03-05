@@ -58,7 +58,11 @@ public class ComandoPedidoTestDataBuilder {
         this.productos = Arrays.asList(1L, 2L, 10L, 20L, 21L, 22L);
         this.citasPeluqueria = Arrays.asList(new ComandoCitaPeluqueriaTestDataBuilder().setId(null).build());
         this.bonoDescuento = 1L;
-        this.fechaEntrega = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse("2021-03-13T14:12:22.354Z");
+        Double anio = Math.floor(Math.random() * 50 + 22);
+        Double mes = Math.floor(Math.random() * 2 + 10);
+        Double dia = Math.floor(Math.random() * 18 + 10);
+        String fechaIso = "20" + anio.intValue() + "-" + mes.intValue() + "-" + dia.intValue() + "T14:12:22.354Z";
+        this.fechaEntrega = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse(fechaIso);
         this.tipoMoneda = "COP";
     }
 }

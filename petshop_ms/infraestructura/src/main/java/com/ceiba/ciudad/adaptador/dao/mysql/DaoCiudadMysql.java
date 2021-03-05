@@ -1,5 +1,7 @@
 package com.ceiba.ciudad.adaptador.dao.mysql;
 
+import java.util.List;
+
 import com.ceiba.ciudad.adaptador.dao.mysql.mapeo.MapeoCiudad;
 import com.ceiba.ciudad.modelo.entidad.Ciudad;
 import com.ceiba.ciudad.puerto.dao.DaoCiudad;
@@ -13,6 +15,10 @@ public class DaoCiudadMysql implements DaoCiudad {
 
     @SqlStatement(namespace = "ciudad", value = "consultarPorId")
     private static String consultarPorId;
+
+    @SqlStatement(namespace = "ciudad", value = "lista")
+    private static String sqlLista;
+
     private CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     public DaoCiudadMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
@@ -25,5 +31,10 @@ public class DaoCiudadMysql implements DaoCiudad {
         params.addValue("id", id);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(consultarPorId,
                 params, new MapeoCiudad());
+    }
+
+    @Override
+    public List<Ciudad> lista() {
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlLista, new MapeoCiudad());
     }
 }

@@ -1,5 +1,7 @@
 package com.ceiba.producto.adaptador.dao.mysql;
 
+import java.util.List;
+
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.producto.adaptador.dao.mysql.mapeo.MapeoCategoriaProducto;
@@ -15,6 +17,9 @@ public class DaoCategoriaProductoMysql implements DaoCategoriaProducto {
     @SqlStatement(namespace = "categoriaproducto", value = "consultarPorId")
     private static String sqlEncontrarPorId;
 
+    @SqlStatement(namespace = "categoriaproducto", value = "lista")
+    private static String sqlLista;
+
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     public DaoCategoriaProductoMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
@@ -27,6 +32,12 @@ public class DaoCategoriaProductoMysql implements DaoCategoriaProducto {
         params.addValue("id", id);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlEncontrarPorId,
                 params, new MapeoCategoriaProducto());
+    }
+
+    @Override
+    public List<CategoriaProducto> lista() {
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlLista,
+                new MapeoCategoriaProducto());
     }
 
 }

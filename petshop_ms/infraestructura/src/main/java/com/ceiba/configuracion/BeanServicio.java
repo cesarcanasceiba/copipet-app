@@ -25,7 +25,8 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioCrearPedido servicioCrearPedido(RepositorioPedido repositorioPedido) {
-        return new ServicioCrearPedido(repositorioPedido);
+    public ServicioCrearPedido servicioCrearPedido(RepositorioPedido repositorioPedido,
+            ServicioCrearCitaPeluqueria servicioCrearCitaPeluqueria) {
+        return new ServicioCrearPedido(repositorioPedido, servicioCrearCitaPeluqueria);
     }
 }

@@ -23,7 +23,11 @@ public class ComandoCitaPeluqueriaTestDataBuilder {
         this.id = 1L;
         this.peluquero = 1L;
         this.servicios = Arrays.asList(1L, 3L, 4L, 5L, 6L);
-        this.fechaInicio = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse("2021-03-07T14:12:22.354Z");
+        Double anio = Math.floor(Math.random() * 50 + 22);
+        Double mes = Math.floor(Math.random() * 2 + 10);
+        Double dia = Math.floor(Math.random() * 18 + 10);
+        String fechaIso = "20" + anio.intValue() + "-" + mes.intValue() + "-" + dia.intValue() + "T14:12:22.354Z";
+        this.fechaInicio = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX").parse(fechaIso);
         this.usuario = 1L;
         this.fotoMascota = "https://i.pinimg.com/originals/63/67/0b/63670bc6d54aed140e1358c97fddb024.jpg";
         this.pesoMascota = 33.5F;

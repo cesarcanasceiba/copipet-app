@@ -1,1 +1,7 @@
-select id, nombre from peluquero where id=:id;
+select
+    id,
+    nombre
+from
+    peluquero
+where
+    id = :id;

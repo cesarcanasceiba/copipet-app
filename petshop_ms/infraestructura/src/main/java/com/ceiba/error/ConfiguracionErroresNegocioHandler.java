@@ -5,6 +5,8 @@ import com.ceiba.citapeluqueria.exception.CiudadNoValidaParaCita;
 import com.ceiba.citapeluqueria.exception.FechaInicioCitaInvalidaException;
 import com.ceiba.citapeluqueria.exception.PesoNoAceptadoException;
 import com.ceiba.infraestructura.error.ManejadorError;
+import com.ceiba.pedido.exception.PedidoConListasVaciasException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -16,5 +18,6 @@ public class ConfiguracionErroresNegocioHandler {
         manejadorError.registrarExcepcionNegocio(CitasSimultaneasException.class, HttpStatus.BAD_REQUEST);
         manejadorError.registrarExcepcionNegocio(FechaInicioCitaInvalidaException.class, HttpStatus.BAD_REQUEST);
         manejadorError.registrarExcepcionNegocio(PesoNoAceptadoException.class, HttpStatus.BAD_REQUEST);
+        manejadorError.registrarExcepcionNegocio(PedidoConListasVaciasException.class, HttpStatus.BAD_REQUEST);
     }
 }

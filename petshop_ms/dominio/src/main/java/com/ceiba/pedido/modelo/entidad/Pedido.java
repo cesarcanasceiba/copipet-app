@@ -36,6 +36,8 @@ public class Pedido {
 		this.citasPeluqueria = Collections.unmodifiableList(citasPeluqueria);
 		this.bonoDescuento = bonoDescuento;
 		this.fechaEntrega = new Date(fechaEntrega.getTime());
+		this.tipoMoneda = tipoMoneda;
+		this.conversorMoneda = conversorMoneda;
 		this.costoTotal = this.definirCostoTotal(productos, citasPeluqueria, tipoMoneda, conversorMoneda);
 	}
 

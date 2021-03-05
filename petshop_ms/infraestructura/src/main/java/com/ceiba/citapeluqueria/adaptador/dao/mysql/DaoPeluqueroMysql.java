@@ -1,5 +1,7 @@
 package com.ceiba.citapeluqueria.adaptador.dao.mysql;
 
+import java.util.List;
+
 import com.ceiba.citapeluqueria.adaptador.dao.mysql.mapeo.MapeoPeluquero;
 import com.ceiba.citapeluqueria.modelo.entidad.Peluquero;
 import com.ceiba.citapeluqueria.puerto.dao.DaoPeluquero;
@@ -14,6 +16,10 @@ public class DaoPeluqueroMysql implements DaoPeluquero {
 
     @SqlStatement(namespace = "peluquero", value = "consultarPorId")
     private static String consultarPorId;
+
+    @SqlStatement(namespace = "peluquero", value = "lista")
+    private static String sqlLista;
+
     private CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     public DaoPeluqueroMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
@@ -26,5 +32,11 @@ public class DaoPeluqueroMysql implements DaoPeluquero {
         params.addValue("id", id);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(consultarPorId,
                 params, new MapeoPeluquero());
+    }
+
+    @Override
+    public List<Peluquero> lista() {
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlLista,
+                new MapeoPeluquero());
     }
 }

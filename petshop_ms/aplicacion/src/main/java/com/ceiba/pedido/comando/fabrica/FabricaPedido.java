@@ -43,6 +43,7 @@ public class FabricaPedido {
         List<Producto> productos = daoProducto.listaDeProductosPorId(comandoPedido.getProductos());
         List<CitaPeluqueria> citasPeluqueria = comandoPedido.getCitasPeluqueria().stream()
                 .map(this.fabricaCitaPeluqueria::crear).collect(Collectors.toList());
+
         if (Objects.nonNull(comandoPedido.getBonoDescuento())) {
             bonoDescuento = this.daoBonoDescuento.obtenerBonoPorId(comandoPedido.getBonoDescuento());
         } else {

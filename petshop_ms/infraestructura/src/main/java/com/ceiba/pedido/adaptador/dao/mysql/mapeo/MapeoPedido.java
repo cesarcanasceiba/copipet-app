@@ -41,7 +41,6 @@ public class MapeoPedido implements RowMapper<Pedido>, MapperResult {
         BonoDescuento bonoDescuento = daoBonoDescuento.obtenerBonoPorId(rs.getLong("bonoDescuento_id"));
         Date fechaEntrega = rs.getDate("fechaEntrega");
         TipoMoneda tipoMoneda = TipoMoneda.COP;
-        ConversorMonedaInterface conversorMoneda = this.conversorMoneda;
         return new Pedido(id, productos, citasPeluqueria, bonoDescuento, fechaEntrega, tipoMoneda, conversorMoneda);
     }
 

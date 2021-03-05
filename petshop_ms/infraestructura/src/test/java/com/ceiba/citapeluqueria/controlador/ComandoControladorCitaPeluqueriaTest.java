@@ -35,5 +35,4 @@ public class ComandoControladorCitaPeluqueriaTest {
 		mocMvc.perform(post("/citapeluqueria").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(comandoCita))).andExpect(status().isOk());
 	}
-
 }
